@@ -1,0 +1,44 @@
+---
+title: Python Blog
+author: ''
+date: '2020-12-09'
+slug: python-blog
+categories: []
+tags: []
+description: ''
+---
+![](https://i.pinimg.com/736x/7c/6a/ca/7c6acaabf60032c86abd6951c6cfc557.jpg)
+
+Oh python, how we love you so!! But for real, are data processing programs not the coolest and most mind boggling technology you've ever seen. They literally have such endless capabilities!! As I have recently gained more knowledge regarding the functions of Python, one handy tip has stood out to me. Drum roll please.....
+
+Tip = The fact that strings in Python are immutable.  Basically, you can assign a string to a variable name and then in some way alter that string. However, the string is not saved with the new changes. Instead, the variable still contains the orginal string. I listed an example below where I assigned the world PYTHON to the variable "p". I then altered the string by making the letters lowercase. However, when I call python to print the original p variable, the word PYTHON is back to capitalized. This is direct proof that strings are immutable. 
+
+It is important to remember this fact about strings, especially if you are used to working in other programs such are R. In R, any changes made to strings are automatically saved. Therefore, to save youself a future headache wondering why your Python functions are not working, commit this little tip to memory!! :))) 
+
+
+
+
+```{r, setup}
+library(reticulate)
+```
+
+```{python}
+p="PYTHON"
+print(p)
+print(p.lower())
+print(p)
+```
+
+Oh speaking of R!  I recently learned how easy it is two get R and Python to work together. It is crazy how reticulate can really rock the best of both programs. I would have not thought it was possible, but now I've learned it isn't just possible, it's easy. Let me show ya!
+
+```{r}
+library(reticulate)
+x <- "Thank you"
+```
+
+
+```{python}
+y ="for reading."
+print(r.x,y)
+```
+

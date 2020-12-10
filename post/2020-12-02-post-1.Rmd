@@ -1,0 +1,13 @@
++++
+title = ""
+description = ""
+tags = []
+categories = []
++++
+
+Hi welcome to my blog!!
+[Link to project 1](projects/project1/)
+
+[Link to google](https://www.google.com)
+
+Hi here is my blost. To be continued. 

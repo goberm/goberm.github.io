@@ -1,0 +1,235 @@
+---
+title: "Project 2: Modeling, Testing, and Predicting"
+author: "Morgan Gober"
+date: "11/16/2020"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+library(knitr)
+hook_output = knit_hooks$get('output')
+knit_hooks$set(output = function(x, options) {
+  # this hook is used only when the linewidth option is not NULL
+  if (!is.null(n <- options$linewidth)) {
+    x = knitr:::split_lines(x)
+    # any lines wider than n should be wrapped
+    if (any(nchar(x) > n)) x = strwrap(x, width = n)
+    x = paste(x, collapse = '\n')
+  }
+  hook_output(x, options)
+})
+
+knitr::opts_chunk$set(echo = TRUE, eval = TRUE,fig.align="center",warning=FALSE,message=FALSE,fig.width=8, fig.height=5, linewidth=60)
+options(tibble.width = 100,width = 100)
+library(tidyverse)
+```
+
+
+```{r}
+wife<- read.csv("https://vincentarelbundock.github.io/Rdatasets/csv/Ecdat/Workinghours.csv")
+```
+####This dataset contains data that was collected from working women. It contains 12 columns and 3382 observations. There are 8 numeric variables. The numbers of hours the wife works, her household income (in hundreds of dollars), her age, the number of children she has between ages 0-5, 6-13, and 14-17, her local unemployment rate, and lastly her education years. There is one categorical variable, occupation of her husband. The options were farmer, (fr), manager or professional (mp), sales worker, clerk, or craftsman (swcc), or other. Finally, there are 3 binary variables: is the wife non-white, is her home owned by the couple, and do they have a mortgage.
+
+##Manova
+```{r}
+man1<-manova(cbind(age,education, income)~occupation, data=wife)
+summary(man1)
+summary.aov(man1)
+wife%>%group_by(occupation)%>%summarize(mean(age),mean(education),mean(income))
+pairwise.t.test(wife$age,wife$occupation,p.adj="none")
+pairwise.t.test(wife$education,wife$occupation,p.adj="none")
+pairwise.t.test(wife$income,wife$occupation,p.adj="none")
+0.05/22 ## Bonferroni correction
+
+##Assumptions
+library(rstatix)
+
+group <- wife$occupation 
+DVs <- wife %>% select(age, education,income)
+
+sapply(split(DVs,group), mshapiro_test)
+
+
+```
+#### In total 22 tests were performed: 1 Manova, 3 Anovas, and 18 t-tests. After the bonferroni correction, the new signficance level was 0.0023. It was concluded that occupation differed significantly by age between fr and swcc, mp and other, swcc and mp, and other and swcc. Husbands occupation differed signficantly by wife's education for all occupation categories excepet between fr and swcc. Husbands occupation differed signficantly by household income for all occupation categories excepet between fr and swcc and fr and swcc.There are many MANOVA assumptions that must be met including random samples, independent observations, multivariate normality, homogeneity, no outliers, and no linear relationships. The multivariate normaility assumption was tested for and the p-value was less than 0.05. As a result, the null hypothesis was rejected which means the assumptions were not met. 
+
+##Randomization Test: Difference in Means
+```{r}
+ wife%>%group_by(mortgage)%>%
+  summarize(means=mean(age))%>%summarize(`mean_diff`=diff(means))
+
+rand_dist<-vector()
+for(i in 1:5000){
+new<-data.frame(age=sample(wife$age),mortgage=wife$mortgage) 
+rand_dist[i]<-mean(new[new$mortgage=="1",]$age)-   
+              mean(new[new$mortgage=="0",]$age)
+}
+mean(rand_dist< -0.88579	 | rand_dist> 0.88579) 
+
+
+{hist(rand_dist,main="",ylab=""); abline(v = c(-0.88579, 0.88579),col="red")}
+
+```
+####I performed a randomized mean difference to test if there is a significant difference in age between groups that did and did not have a mortgage. The null hypothesis was: there is no significant mean difference in age between those who do and do not have a mortgage. The alternate hypothesis was: there is a significant mean difference in age between those who do and do not have a mortgage. The p-value was determined to be 0.0242. Therefore you reject the null hypothesis and conclude there is a mean difference in age between those who do and do not have a mortgage. 
+
+##Linear Regression Model
+```{r}
+##Regression Model
+wife$age_c <- wife$age - mean(wife$age)
+wife$income_c <- wife$income - mean(wife$income)
+fit<-lm(education ~ age_c * income_c, data=wife)
+summary(fit)
+
+##Regression Plot
+wife_new <- bind_rows(mutate(wife,age_c=0), mutate(wife,age_c=sd(age)), mutate(wife,age_c=-sd(age)))
+
+wife_new <- wife_new%>%
+  mutate(age_cat=c(rep("mean",nrow(wife)), rep("mean+1sd",nrow(wife)), rep("mean-1sd",nrow(wife))))
+
+wife_new$newprob <- predict(fit, newdata=wife_new, type="response")
+ggplot(wife_new, aes(income_c,newprob))+geom_line(aes(color=age_cat))
+
+library(sandwich); library(lmtest)
+## Checking for assumptions
+
+resids<-fit$residuals
+fitted<-fit$fitted.values
+plot(fitted,resids); abline(h=0, col='red')
+par(mfrow=c(1,2)); hist(resids); qqnorm(resids); qqline(resids, col='red')
+
+
+##With Robust Standard Erros
+coeftest(fit)[,1:2] 
+coeftest(fit, vcov=vcovHC(fit))[,1:2]
+```
+####12.6 years is the mean education for people with an average income at an average age. At an average income, for every 1 unit increase in age, education level goes down by -.055 years. At an average age, for every 1 unit increase in income, education goes up by 0.0032 years. There was an interaction between age and income. Therefore, the effect of age on education depends on income. The coefficient of -0.001 indicates that the effect of income on education decreases the older you are in age. According to the residual and qq plot, the linearity and homoskewdasticity assumption was not met. In addition, the data is somewhat normally distrubuted but definitely not perfectly. Therefore, this regression model did not meet assumptions. Robust standard error calculations produced a larger standard error than before. Because the robust standard errors are larger, they are considered the more conservative of the two values. Therefore, they should be the standard errors chosen for the model. The adjusted r-squared value was 0.128; therefore, 12.8% of the variation in the outcome is explained by the model. 
+
+
+##Bootstrapping
+```{r}
+boot<- sample_frac(wife, replace=T)
+samp_distn<-replicate(5000, {
+  boot <- sample_frac(wife, replace=T) 
+  fit1 <- lm(education~income_c*age_c, data=boot) 
+  coef(fit1) 
+}) 
+samp_distn %>% t %>% as.data.frame %>% summarize_all(sd) 
+```
+####The boot strapped standard errors are slightly smaller than the robust standard errors but slightly larger the original SE's. Since it is better to go with the more larger, more conservative standard errors, the robust standard errors from above should still be used to represent this model.
+
+##Logistic Regression
+```{r}
+fit2<-glm(owned~age+income+hours, data=wife, family="binomial")
+coeftest(fit2)
+coef(fit2)%>%exp%>%round(5)%>%data.frame
+
+probs<-predict(fit2,type="response")
+table(predict=as.numeric(probs>.5),truth=wife$owned)%>%addmargins
+
+#Sensitivity
+2035/2303
+
+#Speceficity: 
+565/1079
+
+#Precision
+2035/2303
+
+#Accuracy
+(565+2303)/3382
+
+library(plotROC)
+ROCplot<-ggplot(wife)+geom_roc(aes(d=owned,m=probs), n.cuts=0) 
+ROCplot
+calc_auc(ROCplot)
+
+#ggplot
+wife$logit<-predict(fit2,type="link")
+wife%>%mutate(owned=as.factor(owned)) %>%ggplot()+geom_density(aes(logit,color=owned,fill=owned), alpha=0.4)+
+  theme(legend.position=c(.85,.85))+geom_vline(xintercept=0)+xlab("logit (log-odds)")+
+  geom_rug(aes(logit,color=owned))
+
+```
+##Predicted odds of homeownership when age, income, and hours are 0 is 0.032. Controlling for income and hours, for every one-unit increase in age, predicted odds of ownership increase by a factor of 1.07. Controlling for age and hours, for every one-unit increase in income, predicted odds of ownership increase by a factor of 1.006. Controlling for age and income, for every one-unit increase in hours, predicted odds of ownership increase by a factor of 1.00. The TPR is 0.884. The TNR is 0.524. The precision is 0.884,and the accuracy is 0.848. Therefore, the accuracy, sensitivity, and precision are pretty good. The speceficity is okay but definitely has room for improvement. The auc, 0.8, is considered good. Therefore, this model is pretty good at predicting ownership. 
+
+
+##Logistic Regression with all Variables & Lasso
+```{r}
+#Class Diag 
+class_diag<-function(probs,truth){
+  tab<-table(factor(probs>.5,levels=c("FALSE","TRUE")),truth)
+  acc=sum(diag(tab))/sum(tab)
+  sens=tab[2,2]/colSums(tab)[2]
+  spec=tab[1,1]/colSums(tab)[1]
+  ppv=tab[2,2]/rowSums(tab)[2]
+  f1=2*(sens*ppv)/(sens+ppv)
+
+  if(is.numeric(truth)==FALSE & is.logical(truth)==FALSE){
+    truth<-as.numeric(truth)-1}
+  
+  ord<-order(probs, decreasing=TRUE)
+  probs <- probs[ord]; truth <- truth[ord]
+  
+  TPR=cumsum(truth)/max(1,sum(truth)) 
+  FPR=cumsum(!truth)/max(1,sum(!truth))
+  
+  dup<-c(probs[-1]>=probs[-length(probs)], FALSE)
+  TPR<-c(0,TPR[!dup],1); FPR<-c(0,FPR[!dup],1)
+  
+  n <- length(TPR)
+  auc<- sum( ((TPR[-1]+TPR[-n])/2) * (FPR[-1]-FPR[-n]) )
+
+  data.frame(acc,sens,spec,ppv,f1,auc)
+}
+
+##Logistic Regression with all variables 
+fit3<-glm(owned~age+education+income+child5+child13+child17+nonwhite+mortgage+unemp, data=wife, family="binomial")
+prob3<-predict(fit3,type="response")
+class_diag(prob3,wife$owned)
+
+##Out of Sample:
+k=10
+data<-wife[sample(nrow(wife)),] 
+folds<-cut(seq(1:nrow(wife)),breaks=k,labels=F) 
+diags<-NULL
+for(i in 1:k){
+  train<-data[folds!=i,]
+  test<-data[folds==i,]
+  truth<-test$owned
+  fit<-glm(owned~age+education+income+child5+child13+child17+nonwhite+mortgage+unemp, data=wife,family="binomial")
+  probs<-predict(fit,newdata = test,type="response")
+  diags<-rbind(diags,class_diag(probs,truth))
+}
+summarize_all(diags,mean)
+
+#LASSO
+library(glmnet)
+y<-as.matrix(wife$owned) 
+x<-model.matrix(owned~age+education+income+child5+child13+child17+nonwhite+mortgage+unemp,data=wife) 
+head(x)
+cv <- cv.glmnet(x,y, family="binomial")
+{plot(cv$glmnet.fit, "lambda", label=TRUE); abline(v = log(cv$lambda.1se)); abline(v = log(cv$lambda.min),lty=2)}
+lasso<-glmnet(x,y,family="binomial",lambda=cv$lambda.1se)
+coef(lasso)
+
+##Lasso Variable Logistic Regression
+k=10
+data<-wife[sample(nrow(wife)),] 
+folds<-cut(seq(1:nrow(wife)),breaks=k,labels=F) 
+diags<-NULL
+for(i in 1:k){
+  train<-data[folds!=i,]
+  test<-data[folds==i,]
+  truth<-test$owned
+  fit<-glm(owned~age+income+nonwhite+mortgage, data=wife,family="binomial")
+  probs<-predict(fit,newdata = test,type="response")
+  diags<-rbind(diags,class_diag(probs,truth))
+}
+summarize_all(diags,mean)
+```
+####For the logistic regression model testing all variables: accuracy=0.908, sensitivity=0.91, specificity=0.89, precision=0.95,and auc=0.965. This a a very good auc which indicates that sensitivity and specificity are also very good. This was proven by the TPR and TNR values given by class diagnostics. Overall, all of the values were very high which indicates this model is very good at predicting ownership.   
+####The out of sample class diags were calculated at: accuracy=0.908, sensitivity=0.94, specificity=0.89, precision=0.95,and auc 0.967. This auc is also classified as very good and is almost exactly equal to the in-sample AUC. Therefore, the model does not appear to be overfitted. 
+####After performing Lasso, the variables age, income, nonwhite, and mortgage all had a nonzero value. Therefore, they were the variables that were retained. The 10-fold cv using the lasso selected variables produced a model with an auc of 0.965, which is considered very good. When compared to the other auc's calculated with the logistic regressions above, this auc is very similar. Therefore, there is not much of a difference in predicitions made by the model including all the variables and the model only using the lasso selected variables. Overall, all of the models have a very good auc indicating they are all about equally good at predicting ownership. 
+
+
+

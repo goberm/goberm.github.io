@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Projects on Morgan Gober: The Latest and Greatest</title>
+    <link>/project/</link>
+    <description>Recent content in Projects on Morgan Gober: The Latest and Greatest</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-US</language><atom:link href="/project/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Project 2: Modeling, Testing, and Predicting</title>
+      <link>/project/project2/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>/project/project2/</guid>
+      <description>wife&amp;lt;- read.csv(&amp;quot;https://vincentarelbundock.github.io/Rdatasets/csv/Ecdat/Workinghours.csv&amp;quot;) This dataset contains data that was collected from working women. It contains 12 columns and 3382 observations. There are 8 numeric variables. The numbers of hours the wife works, her household income (in hundreds of dollars), her age, the number of children she has between ages 0-5, 6-13, and 14-17, her local unemployment rate, and lastly her education years. There is one categorical variable, occupation of her husband.</description>
+    </item>
+    
+    <item>
+      <title>project1</title>
+      <link>/project/project1/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>/project/project1/</guid>
+      <description>R Markdown This is an R Markdown document. Markdown is a simple formatting syntax for authoring HTML, PDF, and MS Word documents. For more details on using R Markdown see http://rmarkdown.rstudio.com.
+When you click the Knit button a document will be generated that includes both content as well as the output of any embedded R code chunks within the document. You can embed an R code chunk like this:</description>
+    </item>
+    
+  </channel>
+</rss>

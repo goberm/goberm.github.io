@@ -1,0 +1,126 @@
+---
+title: "project1"
+author: "Me"
+date: "10/5/2020"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE, eval = TRUE, fig.align = "center", warning = F, message = F,
+tidy=TRUE, tidy.opts=list(width.cutoff=60), R.options=list(max.print=100))
+```
+
+## R Markdown
+
+This is an R Markdown document. Markdown is a simple formatting syntax for authoring HTML, PDF, and MS Word documents. For more details on using R Markdown see <http://rmarkdown.rstudio.com>.
+
+When you click the **Knit** button a document will be generated that includes both content as well as the output of any embedded R code chunks within the document. You can embed an R code chunk like this:
+
+## Introduction
+##### To begin, I searched the Kaggle website for datasets to use for this project. First, I found a 2019 dataset that ranked 156 countries based upon their happiness level. The data contained additional variables that can be indicative of happiness, such as generosity and GDP. All of these variables were described numerically. Therefore, the only categorical variable was country. This dataset really sparked my interest because I am very into ways to be happy and get the most out of life. I wanted to be able to explore this data and see if I noticed any common characteristics between countries ranked happiest and most unhappy. 
+##### Once I found the first dataset, I began looking for another dataset that contained the same ID variable, country.  I quickly ran across a dataset that contained geographic information about different countries. I thought this would be a perfect datset to combine with the happiness dataset since geography isn't year dependent. Therefore, this dataset would make sense to merge with the happiness dataset that was based upon conditions in 2019. I expect to see that the happiest countries  are the biggest countries. In addition, I think that a higher GDP will result in a greater happiness level, since a greater GDP allows for a better quality of living.
+
+##Joining
+
+```{R}
+library(tidyverse)
+happiness19 <- read_csv("2019.csv")
+countries <- read_csv("country_profile_variables.csv")
+countries2 <- countries %>% select(1:3)
+totaldat <- happiness19%>%inner_join(countries2, by=c("Country or region"="country"))
+totaldat$`Surface area (km2)` <- as.numeric(totaldat$`Surface area (km2)`)
+names(totaldat)<-str_replace_all(names(totaldat), c(" " = "."))
+```
+ 
+
+
+#### I chose to join two datasets that shared the common ID variable "country". The first dataset contains 9 variables and 156 observations. This dataset ranks 156 countries from  happiest  to unhappiest.  The other variables are all potential indicators of happiness such as life expectancy, corruption, and social support. All the variables except "country" are numeric. The other data set I chose originally contained 50 variables and 229 observations. However, the happiness data was collected in 2019 and some of the data in this second dataset was year dependent. Therefore, I removed the year dependent data in the second dataset. The result was a dataset with 3 columns and 229 observations. This dataset described each country by its surface area and region. I chose to perform an inner join because I only wanted to keep the countries that existed in both data sets. I hypothesized that the larger the country, the higher their happiness ranking would be. Therefore, I only wanted countries found in both datasets so sufficient information would be  provided to test this hypothesis. I don't expect that dropping any data will cause problems. 
+
+##Wrangling
+```{R}
+
+
+totaldat %>% group_by(Region) %>% summarize_if(is.numeric, c(mean=mean, sd=sd, max_value=max, min_value=min, count=n_distinct)) %>% pivot_longer(-1) %>%  separate(name,into=c("Variable","Statistic"),sep="_") %>% pivot_wider(names_from="Region", values_from="value")
+
+totaldat %>% select(-Score) %>% summarize_if(is.numeric, c(mean=mean, sd=sd, max_value=max, min_value=min)) %>% pivot_longer( values_to="Avg. Value for All Countries", contains("_")) %>% separate(name,into=c("Variable","Statistic"),sep="_")
+
+totaldat %>% mutate(Score_Categories = case_when(Score>4 ~ "high", Score<4 ~ "low")) %>% group_by(Region,Score_Categories) %>% summarize(avg_Generosity=mean(Generosity, na.rm=T)) %>% pivot_wider(names_from = "Score_Categories", values_from="avg_Generosity") %>% pivot_longer(-1, names_to="Category", values_to="Value")
+
+totaldat %>% mutate_at(vars(Score:Generosity), list(z=scale))
+
+totaldat %>% arrange(desc(`Overall.rank`)) %>% filter(Region == "EasternAfrica") %>% summarize_if(is.numeric, n_distinct) %>% pivot_longer(1:8, names_to="Statistic", values_to="Count")
+
+cormat <- totaldat %>% select_if(is.numeric) %>% cor(use="pair") 
+cormat
+
+
+```
+
+####By ranking by region and then computing summary statistics, it was determined that countries in  North America have the overall highest happiness score/rank. These results, along with several others, had to be pivoted longer and wider in order to display the data properly when knitted. I gave each country its own column and each variable its own row to ensure the max amount of data was visible. The correlation matrix provided evidence to reject the hypothesis that the largest countries (by surface area) tend to have a greater happiness rank. Instead, the matrix showed that healthy life expectancy, GDP, and social support are the greatest indicators of happiness. Therefore, it would be expected that  North America would have the highest values in these 3 categories. Indeed, North America was second in GDP to Western Europe, third in social support behind Northern Europe and Oceania, and first in life expecantacy. Overall, North America had scores for each variable that were larger than the mean value of the variables computed using the entire dataset. 
+
+####The lowest ranking country was South Sudan. South Sudan had a freedom to make choices z-score of -2.669, the smallest z-score for the whole data set. Myanmar had the greatest z-score at 3.89 for generosity. While it would be expected that high overall scores indicate high individual variable scores, this was not always the case. The Carribean and Western Africa were an exceptation to this trend considering score and  generosity. In these two countries, the lower ranking overall score category (created with mutate) had a higher average generosity score compared the generosity score of the higher ranking overall score category. 
+
+##Correlation Heat Map
+```{R}
+
+tidycor <- cormat %>% as.data.frame %>% rownames_to_column("Variable1") %>%
+  pivot_longer(-1,names_to="Variable2",values_to="correlation")
+tidycor%>%ggplot(aes(Variable1,Variable2,fill=correlation))+geom_tile()+scale_fill_gradient2(low="pink",mid="green",high="blue")+theme(axis.text.x = element_text(angle = 90, hjust=1))+coord_fixed()
+```
+
+##Plot 1
+
+```{r}
+#totaldat %>% group_by(Region) %>% summarize(mean=mean(Score)) %>%ggplot(aes(x=Region,y=mean))+geom_bar(stat="identity")+theme(axis.text.x = element_text(angle = 90, hjust=1))
+
+totaldat %>% group_by(Region) %>% ggplot( aes(x=Region, y=Score, color=`Social.support`)) + geom_point(shape=19, size=2.5)+coord_map()+theme(axis.text.x = element_text(angle = 90, hjust=1)) +ggtitle("Region Happiness and Social Support Levels ")+scale_color_gradient(low="blue", high="red")+ scale_y_continuous(breaks = seq(0, 
+    8, by = .5))
+```
+
+
+#### This plot grouped the countries by region and then showed the relationship between score and region. This allowed the higher ranking and lower ranking regions to easily be identfieid. One quick glance shows that North America, Oceania, and Northern Europe all rank high in the overall happiness score, while Eastern Africa ranks towards the bottom. One thing I liked specefically about this plot is it shows how many countries are represented in each region. For example, it is easily recognized that the Caribbean contains 3 countries, and North Africa contains 4. I thought this was just an added bit of useful information. 
+
+#### In addition, each country in each region is colored by their indiviual social support score. Which according to the correlation matrix, is one of the strongest indicators of the overall score. By coloring the graph this way, the relationship between happiness score and social support is easily distinguishable. The countries with the highest happiness scores also have greater social support scores. Meanwhile, the countries with low overall hapiness scores tend to have lower social support scores. 
+
+##Plot 2
+
+```{r}
+totaldat2 <- totaldat %>% mutate(Rank.Categories = ifelse(Overall.rank>67, "low", 
+                        ifelse(Overall.rank<=67 & 33<=Overall.rank, "med", "high")))
+totaldat2 %>% group_by(Region) %>% ggplot(aes(Region,Perceptions.of.corruption, fill=Rank.Categories)) +  
+                geom_bar(stat="summary", fun=mean, color="white", width=0.75) + theme(axis.text.x = element_text(angle = 90, hjust=1)) +ggtitle(" Perception of Corruption vs. Region") +xlab("Region")+ylab("Perception of Corruption")
+```
+
+#### This plot groups the countries by region on the x-axis and maps the perception of corruption on the y-axis. In addition, the countries were colored by their rank categories. A high rank is characterized by a country that has a very high overall happiness rank (less than 33). The medium category is countries ranked between 33 and 67. The low category contains countries ranking worse than 67. I thought this coloring was unique because it depicted the proportion of different country rankings within each region. For example, this graph shows that North America contains only high ranking countries, while Western Asia contains an almost equal proportion of each. In addition, the graph displayed an interesting and unexpected trend. The countries characterized by high happiness ranking tended to have the highest perceptions of corruption. Meanwhile, countries ranked as medium or low seem to have approximately equal perceptions of corruption. This trend falsifies the assumption that countries ranking high on happiness would likely percieve low levels of corruption in their country. 
+
+##PAM Clustering
+
+```{r}
+library(cluster)
+happclust <- totaldat %>% select(3:5,`Surface.area.(km2)`) %>% scale%>% as.data.frame
+sil_width<-vector() 
+for(i in 2:10){
+  kms <- kmeans(happclust,centers=i) 
+  sil <- silhouette(kms$cluster,dist(happclust)) 
+  sil_width[i]<-mean(sil[,3]) 
+}
+ggplot()+geom_line(aes(x=1:10,y=sil_width))+scale_x_continuous(name="k",breaks=1:10)
+
+pam <- happclust %>% pam(2)
+pam
+
+happclust <- happclust %>% mutate(cluster=as.factor(pam$clustering))
+
+library(plotly)
+happclust%>%plot_ly(x= ~Score,  y = ~GDP.per.capita, z = ~Social.support, color= ~cluster, type = "scatter3d", mode = "markers")
+
+library(GGally)
+ggpairs(happclust, aes(color=cluster))
+
+plot(pam,which=2)
+
+```
+
+####To begin the PAM cluster analysis, I chose four numeric variables, score, GDP, social support, and surface area and scaled them. I determined that 3 clusters is best because 3 had the highest value using the silhouette method. A PAM analysis was then ran on the data and visualized using 2 different plots. The first plot mapped score, social support, and GDP on a 3D graph. The graph displays a positive correlation between all three variables. 
+
+####The second graph is a visualization of the pairwise combinations of all four variables. This visual showed that the strongest correlation is between GDP and Score, 0.806. Therefore, countries with high GDP have high happiness score, and countries with high happiness scores have high GDP. The lowest correlation was between surface area and social support. Therefore, the surface area of a country is not very indicative of its social support levels. The goodness-of-fit of the PAM clustering was 0.44. This small number indicates the structure is weak and not a good fit for the data.  

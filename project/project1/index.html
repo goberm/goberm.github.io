@@ -1,0 +1,409 @@
+<!DOCTYPE html>
+<html lang="en-US">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="author" content="Morgan Gober" />
+    
+    <link rel="shortcut icon" type="image/x-icon" href="../../img/favicon.ico">
+    <title>project1</title>
+    <meta name="generator" content="Hugo 0.79.0" />
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+    <link rel="stylesheet" type="text/css" href="../../css/main.css" />
+    <link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" />
+    <link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:200,400,200bold,400old" />
+    
+    <!--[if lt IE 9]>
+			<script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+			<script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+		<![endif]-->
+
+    
+  </head>
+
+  <body>
+    <div id="wrap">
+      
+      <nav class="navbar navbar-default">
+  <div class="container">
+    <div class="navbar-header">
+      <a class="navbar-brand" href="../../"><i class="fa fa-home"></i></a>
+      <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbar">
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+    </div>
+    <div class="navbar-collapse collapse" id="navbar">
+      <ul class="nav navbar-nav navbar-right">
+      
+        
+        <li><a href="../../post/">BLOG</a></li>
+        
+        <li><a href="../../projects/">PROJECTS</a></li>
+        
+        <li><a href="../../resume/">RESUME</a></li>
+        
+      
+      </ul>
+    </div>
+  </div>
+</nav>
+
+      <div class="container">
+        <div class="blog-post">
+          <h3>
+            <strong><a href="../../project/project1/">project1</a></strong>
+          </h3>
+        </div>
+ 
+<div class="blog-title">
+          <h4>
+         January 1, 0001 
+            &nbsp;&nbsp;
+            
+          </h4>
+        </div>
+
+        <div class="panel panel-default">
+          <div class="panel-body">
+            <div class="blogpost">
+              
+<script src="../../rmarkdown-libs/htmlwidgets/htmlwidgets.js"></script>
+<script src="../../rmarkdown-libs/plotly-binding/plotly.js"></script>
+<script src="../../rmarkdown-libs/typedarray/typedarray.min.js"></script>
+<script src="../../rmarkdown-libs/jquery/jquery.min.js"></script>
+<link href="../../rmarkdown-libs/crosstalk/css/crosstalk.css" rel="stylesheet" />
+<script src="../../rmarkdown-libs/crosstalk/js/crosstalk.min.js"></script>
+<link href="../../rmarkdown-libs/plotly-htmlwidgets-css/plotly-htmlwidgets.css" rel="stylesheet" />
+<script src="../../rmarkdown-libs/plotly-main/plotly-latest.min.js"></script>
+
+
+<div id="r-markdown" class="section level2">
+<h2>R Markdown</h2>
+<p>This is an R Markdown document. Markdown is a simple formatting syntax for authoring HTML, PDF, and MS Word documents. For more details on using R Markdown see <a href="http://rmarkdown.rstudio.com" class="uri">http://rmarkdown.rstudio.com</a>.</p>
+<p>When you click the <strong>Knit</strong> button a document will be generated that includes both content as well as the output of any embedded R code chunks within the document. You can embed an R code chunk like this:</p>
+</div>
+<div id="introduction" class="section level2">
+<h2>Introduction</h2>
+<div id="to-begin-i-searched-the-kaggle-website-for-datasets-to-use-for-this-project.-first-i-found-a-2019-dataset-that-ranked-156-countries-based-upon-their-happiness-level.-the-data-contained-additional-variables-that-can-be-indicative-of-happiness-such-as-generosity-and-gdp.-all-of-these-variables-were-described-numerically.-therefore-the-only-categorical-variable-was-country.-this-dataset-really-sparked-my-interest-because-i-am-very-into-ways-to-be-happy-and-get-the-most-out-of-life.-i-wanted-to-be-able-to-explore-this-data-and-see-if-i-noticed-any-common-characteristics-between-countries-ranked-happiest-and-most-unhappy." class="section level5">
+<h5>To begin, I searched the Kaggle website for datasets to use for this project. First, I found a 2019 dataset that ranked 156 countries based upon their happiness level. The data contained additional variables that can be indicative of happiness, such as generosity and GDP. All of these variables were described numerically. Therefore, the only categorical variable was country. This dataset really sparked my interest because I am very into ways to be happy and get the most out of life. I wanted to be able to explore this data and see if I noticed any common characteristics between countries ranked happiest and most unhappy.</h5>
+</div>
+<div id="once-i-found-the-first-dataset-i-began-looking-for-another-dataset-that-contained-the-same-id-variable-country.-i-quickly-ran-across-a-dataset-that-contained-geographic-information-about-different-countries.-i-thought-this-would-be-a-perfect-datset-to-combine-with-the-happiness-dataset-since-geography-isnt-year-dependent.-therefore-this-dataset-would-make-sense-to-merge-with-the-happiness-dataset-that-was-based-upon-conditions-in-2019.-i-expect-to-see-that-the-happiest-countries-are-the-biggest-countries.-in-addition-i-think-that-a-higher-gdp-will-result-in-a-greater-happiness-level-since-a-greater-gdp-allows-for-a-better-quality-of-living." class="section level5">
+<h5>Once I found the first dataset, I began looking for another dataset that contained the same ID variable, country. I quickly ran across a dataset that contained geographic information about different countries. I thought this would be a perfect datset to combine with the happiness dataset since geography isn't year dependent. Therefore, this dataset would make sense to merge with the happiness dataset that was based upon conditions in 2019. I expect to see that the happiest countries are the biggest countries. In addition, I think that a higher GDP will result in a greater happiness level, since a greater GDP allows for a better quality of living.</h5>
+</div>
+</div>
+<div id="joining" class="section level2">
+<h2>Joining</h2>
+<pre class="r"><code>library(tidyverse)
+happiness19 &lt;- read_csv(&quot;2019.csv&quot;)
+countries &lt;- read_csv(&quot;country_profile_variables.csv&quot;)
+countries2 &lt;- countries %&gt;% select(1:3)
+totaldat &lt;- happiness19 %&gt;% inner_join(countries2, by = c(`Country or region` = &quot;country&quot;))
+totaldat$`Surface area (km2)` &lt;- as.numeric(totaldat$`Surface area (km2)`)
+names(totaldat) &lt;- str_replace_all(names(totaldat), c(` ` = &quot;.&quot;))</code></pre>
+<div id="i-chose-to-join-two-datasets-that-shared-the-common-id-variable-country.-the-first-dataset-contains-9-variables-and-156-observations.-this-dataset-ranks-156-countries-from-happiest-to-unhappiest.-the-other-variables-are-all-potential-indicators-of-happiness-such-as-life-expectancy-corruption-and-social-support.-all-the-variables-except-country-are-numeric.-the-other-data-set-i-chose-originally-contained-50-variables-and-229-observations.-however-the-happiness-data-was-collected-in-2019-and-some-of-the-data-in-this-second-dataset-was-year-dependent.-therefore-i-removed-the-year-dependent-data-in-the-second-dataset.-the-result-was-a-dataset-with-3-columns-and-229-observations.-this-dataset-described-each-country-by-its-surface-area-and-region.-i-chose-to-perform-an-inner-join-because-i-only-wanted-to-keep-the-countries-that-existed-in-both-data-sets.-i-hypothesized-that-the-larger-the-country-the-higher-their-happiness-ranking-would-be.-therefore-i-only-wanted-countries-found-in-both-datasets-so-sufficient-information-would-be-provided-to-test-this-hypothesis.-i-dont-expect-that-dropping-any-data-will-cause-problems." class="section level4">
+<h4>I chose to join two datasets that shared the common ID variable &quot;country&quot;. The first dataset contains 9 variables and 156 observations. This dataset ranks 156 countries from happiest to unhappiest. The other variables are all potential indicators of happiness such as life expectancy, corruption, and social support. All the variables except &quot;country&quot; are numeric. The other data set I chose originally contained 50 variables and 229 observations. However, the happiness data was collected in 2019 and some of the data in this second dataset was year dependent. Therefore, I removed the year dependent data in the second dataset. The result was a dataset with 3 columns and 229 observations. This dataset described each country by its surface area and region. I chose to perform an inner join because I only wanted to keep the countries that existed in both data sets. I hypothesized that the larger the country, the higher their happiness ranking would be. Therefore, I only wanted countries found in both datasets so sufficient information would be provided to test this hypothesis. I don't expect that dropping any data will cause problems.</h4>
+</div>
+</div>
+<div id="wrangling" class="section level2">
+<h2>Wrangling</h2>
+<pre class="r"><code>totaldat %&gt;% group_by(Region) %&gt;% summarize_if(is.numeric, c(mean = mean, 
+    sd = sd, max_value = max, min_value = min, count = n_distinct)) %&gt;% 
+    pivot_longer(-1) %&gt;% separate(name, into = c(&quot;Variable&quot;, 
+    &quot;Statistic&quot;), sep = &quot;_&quot;) %&gt;% pivot_wider(names_from = &quot;Region&quot;, 
+    values_from = &quot;value&quot;)</code></pre>
+<pre><code>## # A tibble: 45 x 21
+##    Variable Statistic Caribbean CentralAmerica CentralAsia EasternAfrica
+##    &lt;chr&gt;    &lt;chr&gt;         &lt;dbl&gt;          &lt;dbl&gt;       &lt;dbl&gt;         &lt;dbl&gt;
+##  1 Overall… mean        9.33e+1        33.1         69.6         132.   
+##  2 Score    mean        4.97e+0         6.39         5.59          4.08 
+##  3 GDP.per… mean        7.23e-1         0.883        0.803         0.350
+##  4 Social.… mean        1.19e+0         1.33         1.42          0.879
+##  5 Healthy… mean        6.86e-1         0.847        0.717         0.480
+##  6 Freedom… mean        3.38e-1         0.488        0.466         0.357
+##  7 Generos… mean        2.13e-1         0.149        0.248         0.224
+##  8 Percept… mean        7.97e-2         0.0824       0.106         0.125
+##  9 Surface… mean        2.91e+4    351941.      800904        424372.   
+## 10 Overall… sd          4.76e+1        15.3         19.4          25.1  
+## # … with 35 more rows, and 15 more variables: EasternAsia &lt;dbl&gt;,
+## #   EasternEurope &lt;dbl&gt;, MiddleAfrica &lt;dbl&gt;, NorthernAfrica &lt;dbl&gt;,
+## #   NorthernAmerica &lt;dbl&gt;, NorthernEurope &lt;dbl&gt;, Oceania &lt;dbl&gt;,
+## #   `South-easternAsia` &lt;dbl&gt;, SouthAmerica &lt;dbl&gt;, SouthernAfrica &lt;dbl&gt;,
+## #   SouthernAsia &lt;dbl&gt;, SouthernEurope &lt;dbl&gt;, WesternAfrica &lt;dbl&gt;,
+## #   WesternAsia &lt;dbl&gt;, WesternEurope &lt;dbl&gt;</code></pre>
+<pre class="r"><code>totaldat %&gt;% select(-Score) %&gt;% summarize_if(is.numeric, c(mean = mean, 
+    sd = sd, max_value = max, min_value = min)) %&gt;% pivot_longer(values_to = &quot;Avg. Value for All Countries&quot;, 
+    contains(&quot;_&quot;)) %&gt;% separate(name, into = c(&quot;Variable&quot;, &quot;Statistic&quot;), 
+    sep = &quot;_&quot;)</code></pre>
+<pre><code>## # A tibble: 32 x 3
+##    Variable                     Statistic `Avg. Value for All Countries`
+##    &lt;chr&gt;                        &lt;chr&gt;                              &lt;dbl&gt;
+##  1 Overall.rank                 mean                              78.0  
+##  2 GDP.per.capita               mean                               0.901
+##  3 Social.support               mean                               1.21 
+##  4 Healthy.life.expectancy      mean                               0.724
+##  5 Freedom.to.make.life.choices mean                               0.398
+##  6 Generosity                   mean                               0.184
+##  7 Perceptions.of.corruption    mean                               0.114
+##  8 Surface.area.(km2)           mean                          696432.   
+##  9 Overall.rank                 sd                                46.2  
+## 10 GDP.per.capita               sd                                 0.406
+## # … with 22 more rows</code></pre>
+<pre class="r"><code>totaldat %&gt;% mutate(Score_Categories = case_when(Score &gt; 4 ~ 
+    &quot;high&quot;, Score &lt; 4 ~ &quot;low&quot;)) %&gt;% group_by(Region, Score_Categories) %&gt;% 
+    summarize(avg_Generosity = mean(Generosity, na.rm = T)) %&gt;% 
+    pivot_wider(names_from = &quot;Score_Categories&quot;, values_from = &quot;avg_Generosity&quot;) %&gt;% 
+    pivot_longer(-1, names_to = &quot;Category&quot;, values_to = &quot;Value&quot;)</code></pre>
+<pre><code>## # A tibble: 38 x 3
+## # Groups:   Region [19]
+##    Region         Category  Value
+##    &lt;chr&gt;          &lt;chr&gt;     &lt;dbl&gt;
+##  1 Caribbean      high      0.11 
+##  2 Caribbean      low       0.419
+##  3 CentralAmerica high      0.149
+##  4 CentralAmerica low      NA    
+##  5 CentralAsia    high      0.248
+##  6 CentralAsia    low      NA    
+##  7 EasternAfrica  high      0.248
+##  8 EasternAfrica  low       0.201
+##  9 EasternAsia    high      0.121
+## 10 EasternAsia    low      NA    
+## # … with 28 more rows</code></pre>
+<pre class="r"><code>totaldat %&gt;% mutate_at(vars(Score:Generosity), list(z = scale))</code></pre>
+<pre><code>## # A tibble: 134 x 17
+##    Overall.rank Country.or.regi… Score GDP.per.capita Social.support
+##           &lt;dbl&gt; &lt;chr&gt;            &lt;dbl&gt;          &lt;dbl&gt;          &lt;dbl&gt;
+##  1            1 Finland           7.77           1.34           1.59
+##  2            2 Denmark           7.6            1.38           1.57
+##  3            3 Norway            7.55           1.49           1.58
+##  4            4 Iceland           7.49           1.38           1.62
+##  5            5 Netherlands       7.49           1.40           1.52
+##  6            6 Switzerland       7.48           1.45           1.53
+##  7            7 Sweden            7.34           1.39           1.49
+##  8            8 New Zealand       7.31           1.30           1.56
+##  9            9 Canada            7.28           1.36           1.50
+## 10           10 Austria           7.25           1.38           1.48
+## # … with 124 more rows, and 12 more variables: Healthy.life.expectancy &lt;dbl&gt;,
+## #   Freedom.to.make.life.choices &lt;dbl&gt;, Generosity &lt;dbl&gt;,
+## #   Perceptions.of.corruption &lt;dbl&gt;, Region &lt;chr&gt;, `Surface.area.(km2)` &lt;dbl&gt;,
+## #   Score_z[,1] &lt;dbl&gt;, GDP.per.capita_z[,1] &lt;dbl&gt;, Social.support_z[,1] &lt;dbl&gt;,
+## #   Healthy.life.expectancy_z[,1] &lt;dbl&gt;,
+## #   Freedom.to.make.life.choices_z[,1] &lt;dbl&gt;, Generosity_z[,1] &lt;dbl&gt;</code></pre>
+<pre class="r"><code>totaldat %&gt;% arrange(desc(Overall.rank)) %&gt;% filter(Region == 
+    &quot;EasternAfrica&quot;) %&gt;% summarize_if(is.numeric, n_distinct) %&gt;% 
+    pivot_longer(1:8, names_to = &quot;Statistic&quot;, values_to = &quot;Count&quot;)</code></pre>
+<pre><code>## # A tibble: 8 x 3
+##   `Surface.area.(km2)` Statistic                    Count
+##                  &lt;int&gt; &lt;chr&gt;                        &lt;int&gt;
+## 1                   14 Overall.rank                    14
+## 2                   14 Score                           14
+## 3                   14 GDP.per.capita                  13
+## 4                   14 Social.support                  14
+## 5                   14 Healthy.life.expectancy         14
+## 6                   14 Freedom.to.make.life.choices    13
+## 7                   14 Generosity                      14
+## 8                   14 Perceptions.of.corruption       12</code></pre>
+<pre class="r"><code>cormat &lt;- totaldat %&gt;% select_if(is.numeric) %&gt;% cor(use = &quot;pair&quot;)
+cormat</code></pre>
+<pre><code>##                              Overall.rank      Score GDP.per.capita
+## Overall.rank                   1.00000000 -0.9890201    -0.81088715
+## Score                         -0.98902010  1.0000000     0.80571672
+## GDP.per.capita                -0.81088715  0.8057167     1.00000000
+## Social.support                -0.77182664  0.7799666     0.78520042
+## Healthy.life.expectancy       -0.80985478  0.8028451     0.83634991
+## Freedom.to.make.life.choices  -0.56433176  0.5840852     0.40851909
+## Generosity                    -0.07533295  0.1116139    -0.08700979
+## Perceptions.of.corruption     -0.40729168  0.4437276     0.31462573
+## Surface.area.(km2)            -0.09726681  0.1033516     0.08734694
+##                              Social.support Healthy.life.expectancy
+## Overall.rank                  -0.7718266396             -0.80985478
+## Score                          0.7799666405              0.80284510
+## GDP.per.capita                 0.7852004156              0.83634991
+## Social.support                 1.0000000000              0.73168799
+## Healthy.life.expectancy        0.7316879899              1.00000000
+## Freedom.to.make.life.choices   0.4568745333              0.42428828
+## Generosity                    -0.0007112443             -0.02374394
+## Perceptions.of.corruption      0.2334839189              0.31354660
+## Surface.area.(km2)             0.0741428814              0.07558171
+##                              Freedom.to.make.life.choices    Generosity
+## Overall.rank                                  -0.56433176 -0.0753329531
+## Score                                          0.58408521  0.1116139318
+## GDP.per.capita                                 0.40851909 -0.0870097859
+## Social.support                                 0.45687453 -0.0007112443
+## Healthy.life.expectancy                        0.42428828 -0.0237439441
+## Freedom.to.make.life.choices                   1.00000000  0.3064695593
+## Generosity                                     0.30646956  1.0000000000
+## Perceptions.of.corruption                      0.46838045  0.3147413006
+## Surface.area.(km2)                             0.09691891 -0.0239365019
+##                              Perceptions.of.corruption Surface.area.(km2)
+## Overall.rank                               -0.40729168        -0.09726681
+## Score                                       0.44372762         0.10335161
+## GDP.per.capita                              0.31462573         0.08734694
+## Social.support                              0.23348392         0.07414288
+## Healthy.life.expectancy                     0.31354660         0.07558171
+## Freedom.to.make.life.choices                0.46838045         0.09691891
+## Generosity                                  0.31474130        -0.02393650
+## Perceptions.of.corruption                   1.00000000         0.07789387
+## Surface.area.(km2)                          0.07789387         1.00000000</code></pre>
+<div id="by-ranking-by-region-and-then-computing-summary-statistics-it-was-determined-that-countries-in-north-america-have-the-overall-highest-happiness-scorerank.-these-results-along-with-several-others-had-to-be-pivoted-longer-and-wider-in-order-to-display-the-data-properly-when-knitted.-i-gave-each-country-its-own-column-and-each-variable-its-own-row-to-ensure-the-max-amount-of-data-was-visible.-the-correlation-matrix-provided-evidence-to-reject-the-hypothesis-that-the-largest-countries-by-surface-area-tend-to-have-a-greater-happiness-rank.-instead-the-matrix-showed-that-healthy-life-expectancy-gdp-and-social-support-are-the-greatest-indicators-of-happiness.-therefore-it-would-be-expected-that-north-america-would-have-the-highest-values-in-these-3-categories.-indeed-north-america-was-second-in-gdp-to-western-europe-third-in-social-support-behind-northern-europe-and-oceania-and-first-in-life-expecantacy.-overall-north-america-had-scores-for-each-variable-that-were-larger-than-the-mean-value-of-the-variables-computed-using-the-entire-dataset." class="section level4">
+<h4>By ranking by region and then computing summary statistics, it was determined that countries in North America have the overall highest happiness score/rank. These results, along with several others, had to be pivoted longer and wider in order to display the data properly when knitted. I gave each country its own column and each variable its own row to ensure the max amount of data was visible. The correlation matrix provided evidence to reject the hypothesis that the largest countries (by surface area) tend to have a greater happiness rank. Instead, the matrix showed that healthy life expectancy, GDP, and social support are the greatest indicators of happiness. Therefore, it would be expected that North America would have the highest values in these 3 categories. Indeed, North America was second in GDP to Western Europe, third in social support behind Northern Europe and Oceania, and first in life expecantacy. Overall, North America had scores for each variable that were larger than the mean value of the variables computed using the entire dataset.</h4>
+</div>
+<div id="the-lowest-ranking-country-was-south-sudan.-south-sudan-had-a-freedom-to-make-choices-z-score-of--2.669-the-smallest-z-score-for-the-whole-data-set.-myanmar-had-the-greatest-z-score-at-3.89-for-generosity.-while-it-would-be-expected-that-high-overall-scores-indicate-high-individual-variable-scores-this-was-not-always-the-case.-the-carribean-and-western-africa-were-an-exceptation-to-this-trend-considering-score-and-generosity.-in-these-two-countries-the-lower-ranking-overall-score-category-created-with-mutate-had-a-higher-average-generosity-score-compared-the-generosity-score-of-the-higher-ranking-overall-score-category." class="section level4">
+<h4>The lowest ranking country was South Sudan. South Sudan had a freedom to make choices z-score of -2.669, the smallest z-score for the whole data set. Myanmar had the greatest z-score at 3.89 for generosity. While it would be expected that high overall scores indicate high individual variable scores, this was not always the case. The Carribean and Western Africa were an exceptation to this trend considering score and generosity. In these two countries, the lower ranking overall score category (created with mutate) had a higher average generosity score compared the generosity score of the higher ranking overall score category.</h4>
+</div>
+</div>
+<div id="correlation-heat-map" class="section level2">
+<h2>Correlation Heat Map</h2>
+<pre class="r"><code>tidycor &lt;- cormat %&gt;% as.data.frame %&gt;% rownames_to_column(&quot;Variable1&quot;) %&gt;% 
+    pivot_longer(-1, names_to = &quot;Variable2&quot;, values_to = &quot;correlation&quot;)
+tidycor %&gt;% ggplot(aes(Variable1, Variable2, fill = correlation)) + 
+    geom_tile() + scale_fill_gradient2(low = &quot;pink&quot;, mid = &quot;green&quot;, 
+    high = &quot;blue&quot;) + theme(axis.text.x = element_text(angle = 90, 
+    hjust = 1)) + coord_fixed()</code></pre>
+<p><img src="../../project/project1_files/figure-html/unnamed-chunk-3-1.png" width="672" style="display: block; margin: auto;" /></p>
+</div>
+<div id="plot-1" class="section level2">
+<h2>Plot 1</h2>
+<pre class="r"><code># totaldat %&gt;% group_by(Region) %&gt;%
+# summarize(mean=mean(Score))
+# %&gt;%ggplot(aes(x=Region,y=mean))+geom_bar(stat=&#39;identity&#39;)+theme(axis.text.x
+# = element_text(angle = 90, hjust=1))
+
+totaldat %&gt;% group_by(Region) %&gt;% ggplot(aes(x = Region, y = Score, 
+    color = Social.support)) + geom_point(shape = 19, size = 2.5) + 
+    coord_map() + theme(axis.text.x = element_text(angle = 90, 
+    hjust = 1)) + ggtitle(&quot;Region Happiness and Social Support Levels &quot;) + 
+    scale_color_gradient(low = &quot;blue&quot;, high = &quot;red&quot;) + scale_y_continuous(breaks = seq(0, 
+    8, by = 0.5))</code></pre>
+<p><img src="../../project/project1_files/figure-html/unnamed-chunk-4-1.png" width="672" style="display: block; margin: auto;" /></p>
+<div id="this-plot-grouped-the-countries-by-region-and-then-showed-the-relationship-between-score-and-region.-this-allowed-the-higher-ranking-and-lower-ranking-regions-to-easily-be-identfieid.-one-quick-glance-shows-that-north-america-oceania-and-northern-europe-all-rank-high-in-the-overall-happiness-score-while-eastern-africa-ranks-towards-the-bottom.-one-thing-i-liked-specefically-about-this-plot-is-it-shows-how-many-countries-are-represented-in-each-region.-for-example-it-is-easily-recognized-that-the-caribbean-contains-3-countries-and-north-africa-contains-4.-i-thought-this-was-just-an-added-bit-of-useful-information." class="section level4">
+<h4>This plot grouped the countries by region and then showed the relationship between score and region. This allowed the higher ranking and lower ranking regions to easily be identfieid. One quick glance shows that North America, Oceania, and Northern Europe all rank high in the overall happiness score, while Eastern Africa ranks towards the bottom. One thing I liked specefically about this plot is it shows how many countries are represented in each region. For example, it is easily recognized that the Caribbean contains 3 countries, and North Africa contains 4. I thought this was just an added bit of useful information.</h4>
+</div>
+<div id="in-addition-each-country-in-each-region-is-colored-by-their-indiviual-social-support-score.-which-according-to-the-correlation-matrix-is-one-of-the-strongest-indicators-of-the-overall-score.-by-coloring-the-graph-this-way-the-relationship-between-happiness-score-and-social-support-is-easily-distinguishable.-the-countries-with-the-highest-happiness-scores-also-have-greater-social-support-scores.-meanwhile-the-countries-with-low-overall-hapiness-scores-tend-to-have-lower-social-support-scores." class="section level4">
+<h4>In addition, each country in each region is colored by their indiviual social support score. Which according to the correlation matrix, is one of the strongest indicators of the overall score. By coloring the graph this way, the relationship between happiness score and social support is easily distinguishable. The countries with the highest happiness scores also have greater social support scores. Meanwhile, the countries with low overall hapiness scores tend to have lower social support scores.</h4>
+</div>
+</div>
+<div id="plot-2" class="section level2">
+<h2>Plot 2</h2>
+<pre class="r"><code>totaldat2 &lt;- totaldat %&gt;% mutate(Rank.Categories = ifelse(Overall.rank &gt; 
+    67, &quot;low&quot;, ifelse(Overall.rank &lt;= 67 &amp; 33 &lt;= Overall.rank, 
+    &quot;med&quot;, &quot;high&quot;)))
+totaldat2 %&gt;% group_by(Region) %&gt;% ggplot(aes(Region, Perceptions.of.corruption, 
+    fill = Rank.Categories)) + geom_bar(stat = &quot;summary&quot;, fun = mean, 
+    color = &quot;white&quot;, width = 0.75) + theme(axis.text.x = element_text(angle = 90, 
+    hjust = 1)) + ggtitle(&quot; Perception of Corruption vs. Region&quot;) + 
+    xlab(&quot;Region&quot;) + ylab(&quot;Perception of Corruption&quot;)</code></pre>
+<p><img src="../../project/project1_files/figure-html/unnamed-chunk-5-1.png" width="672" style="display: block; margin: auto;" /></p>
+<div id="this-plot-groups-the-countries-by-region-on-the-x-axis-and-maps-the-perception-of-corruption-on-the-y-axis.-in-addition-the-countries-were-colored-by-their-rank-categories.-a-high-rank-is-characterized-by-a-country-that-has-a-very-high-overall-happiness-rank-less-than-33.-the-medium-category-is-countries-ranked-between-33-and-67.-the-low-category-contains-countries-ranking-worse-than-67.-i-thought-this-coloring-was-unique-because-it-depicted-the-proportion-of-different-country-rankings-within-each-region.-for-example-this-graph-shows-that-north-america-contains-only-high-ranking-countries-while-western-asia-contains-an-almost-equal-proportion-of-each.-in-addition-the-graph-displayed-an-interesting-and-unexpected-trend.-the-countries-characterized-by-high-happiness-ranking-tended-to-have-the-highest-perceptions-of-corruption.-meanwhile-countries-ranked-as-medium-or-low-seem-to-have-approximately-equal-perceptions-of-corruption.-this-trend-falsifies-the-assumption-that-countries-ranking-high-on-happiness-would-likely-percieve-low-levels-of-corruption-in-their-country." class="section level4">
+<h4>This plot groups the countries by region on the x-axis and maps the perception of corruption on the y-axis. In addition, the countries were colored by their rank categories. A high rank is characterized by a country that has a very high overall happiness rank (less than 33). The medium category is countries ranked between 33 and 67. The low category contains countries ranking worse than 67. I thought this coloring was unique because it depicted the proportion of different country rankings within each region. For example, this graph shows that North America contains only high ranking countries, while Western Asia contains an almost equal proportion of each. In addition, the graph displayed an interesting and unexpected trend. The countries characterized by high happiness ranking tended to have the highest perceptions of corruption. Meanwhile, countries ranked as medium or low seem to have approximately equal perceptions of corruption. This trend falsifies the assumption that countries ranking high on happiness would likely percieve low levels of corruption in their country.</h4>
+</div>
+</div>
+<div id="pam-clustering" class="section level2">
+<h2>PAM Clustering</h2>
+<pre class="r"><code>library(cluster)
+happclust &lt;- totaldat %&gt;% select(3:5, `Surface.area.(km2)`) %&gt;% 
+    scale %&gt;% as.data.frame
+sil_width &lt;- vector()
+for (i in 2:10) {
+    kms &lt;- kmeans(happclust, centers = i)
+    sil &lt;- silhouette(kms$cluster, dist(happclust))
+    sil_width[i] &lt;- mean(sil[, 3])
+}
+ggplot() + geom_line(aes(x = 1:10, y = sil_width)) + scale_x_continuous(name = &quot;k&quot;, 
+    breaks = 1:10)</code></pre>
+<p><img src="../../project/project1_files/figure-html/unnamed-chunk-6-1.png" width="672" style="display: block; margin: auto;" /></p>
+<pre class="r"><code>pam &lt;- happclust %&gt;% pam(2)
+pam</code></pre>
+<pre><code>## Medoids:
+##       ID      Score GDP.per.capita Social.support Surface.area.(km2)
+## [1,]  36  0.6641400      0.7514004      0.7433416        -0.24249046
+## [2,] 102 -0.8038238     -0.9585108     -0.7614574        -0.06601649
+## Clustering vector:
+##   [1] 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1
+##  [38] 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 2 1 1 1 1 1 2 1 1 1 1 2 1 1 1 1 1 1 1 1 2 2
+##  [75] 1 2 2 1 1 2 2 1 2 1 2 2 2 2 1 1 2 2 2 2 2 2 2 2 2 2
+##  [ reached getOption(&quot;max.print&quot;) -- omitted 34 entries ]
+## Objective function:
+##    build     swap 
+## 1.389495 1.172353 
+## 
+## Available components:
+##  [1] &quot;medoids&quot;    &quot;id.med&quot;     &quot;clustering&quot; &quot;objective&quot;  &quot;isolation&quot; 
+##  [6] &quot;clusinfo&quot;   &quot;silinfo&quot;    &quot;diss&quot;       &quot;call&quot;       &quot;data&quot;</code></pre>
+<pre class="r"><code>happclust &lt;- happclust %&gt;% mutate(cluster = as.factor(pam$clustering))
+
+library(plotly)
+happclust %&gt;% plot_ly(x = ~Score, y = ~GDP.per.capita, z = ~Social.support, 
+    color = ~cluster, type = &quot;scatter3d&quot;, mode = &quot;markers&quot;)</code></pre>
+<div id="htmlwidget-1" style="width:672px;height:480px;" class="plotly html-widget"></div>
+<script type="application/json" data-for="htmlwidget-1">{"x":{"visdat":{"113c270e15b0a":["function () ","plotlyVisDat"]},"cur_data":"113c270e15b0a","attrs":{"113c270e15b0a":{"x":{},"y":{},"z":{},"mode":"markers","color":{},"alpha_stroke":1,"sizes":[10,100],"spans":[1,20],"type":"scatter3d"}},"layout":{"margin":{"b":40,"l":60,"t":25,"r":10},"scene":{"xaxis":{"title":"Score"},"yaxis":{"title":"GDP.per.capita"},"zaxis":{"title":"Social.support"}},"hovermode":"closest","showlegend":true},"source":"A","config":{"showSendToCloud":false},"data":[{"x":[2.05664353360762,1.90835550317592,1.86799308069156,1.81534644266847,1.81008177886616,1.80306222712975,1.6828524036437,1.65126442082985,1.62581854578536,1.59774033883971,1.58194634743278,1.52842226544265,1.50385383436521,1.46085907997968,1.42927109716583,1.40031544625313,1.36872746343928,1.31432593748209,1.22833642871105,1.14146947597296,1.02652431628922,1.02389198438806,0.894030277264446,0.887010725528035,0.833486643537896,0.832609199570844,0.815060320229816,0.786104669317118,0.767678346009037,0.761536238239677,0.734335475261082,0.726438479557619,0.700115160546075,0.679056505336841,0.67817906136979,0.664139957896966,0.657120406160555,0.635184306984268,0.614125651775033,0.607983544005674,0.596576772434005,0.579905337060027,0.565866233587204,0.544807578377969,0.529013586971042,0.522871479201682,0.511464707630014,0.451798517870515,0.410558651419097,0.407926319517942,0.406171431583839,0.404416543649737,0.336853358186775,0.292103715867151,0.278942056361379,0.238579633877012,0.235069858008806,0.180668332051617,0.156099900974176,0.087659271544163,0.0859043836100595,0.00605698260837801,-8.51251609826377e-05,-0.034305439875989,-0.0457122114476578,-0.0755453063274069,-0.0895844098002302,-0.121172392614083,-0.122927280548186,-0.156270151296141,-0.190490466011147,-0.200142349648713,-0.30104840585963,-0.363346927520283,-0.549365048535191,-0.616928233998152],"y":[1.08155616333477,1.18750167034125,1.44620581535706,1.18011012334079,1.2195317073432,1.35750725135164,1.19735706634185,0.990393750329196,1.14315238833853,1.17025472734019,1.16039933133959,0.327618369288683,0.92386982732513,1.74433154437528,1.06430922033371,1.47330815435872,1.16286318033974,1.12097774733718,1.48316355035932,0.983002203328745,0.416316933294105,1.04213457933236,0.635599494307509,-0.248922296746559,1.23677865034426,1.92912021938658,0.948508317326636,0.610961004306003,0.253702899284165,0.549364779302238,1.65316913136971,-0.263705390747463,0.968219109327841,1.13576084133808,0.849954357320612,0.751400397314588,-0.384433991754842,0.830243565319407,0.206889768281303,0.879520545322419,-0.510090290762524,0.470521611297419,0.642991041307961,0.891839790323172,0.0270287912703091,1.47577200335887,0.367039953291093,0.704587266311726,0.827779716319257,-0.17254297774189,0.539509383301636,1.04952612633281,0.670093380309618,0.739081152313835,-0.113410601738276,0.145293543277538,0.788358132316847,-0.231675353745505,0.253702899284165,0.352256859290189,0.369503802291243,0.625744098306907,0.280805238285821,0.108335808275279,0.694731870311124,0.788358132316847,0.408925386293653,0.689804172310822,0.115727355275731,0.371967651291394,0.349793010290038,0.211817466281604,-0.216892259744601,0.470521611297419,0.384286896292147,0.145293543277538],"z":[1.23612191739469,1.18982040958716,1.21958566460629,1.35849018802888,1.02115063114543,1.03437963337616,0.905396861626604,1.13690440066426,0.964927371664859,0.865709854934433,1.10713914564514,0.753263335973284,0.799564843780816,0.878938857165157,1.07406664006833,1.12367539843354,0.796257593223135,0.961620121107178,0.32001351291709,1.01453613003007,0.363007770166941,0.85578810326139,0.515141295820261,0.184416240052174,0.475454289128091,0.329935264590133,0.895475109953561,0.756570586530964,0.746648834857922,0.832637349357624,0.826022848242263,0.0951204749947912,0.908704112184284,0.511834045262581,0.961620121107178,0.743341584300241,1.0443013850492,0.997999877241667,0.650738568685176,1.02445788170311,0.369622271282303,0.723498080954155,0.0620479694179825,0.0322827143988551,0.326628014032452,0.349778767936218,0.647431318127496,0.832637349357624,1.04099413449152,0.875631606607475,0.624280564223729,0.680503823704305,0.974849123337902,0.650738568685176,0.865709854934433,0.200952492840579,0.720190830396475,0.263790253436515,0.561442803627793,0.296862759013324,0.488683291358814,0.174494488379132,0.620973313666049,-0.00409704173563485,0.485376040801134,-0.13969431460055,0.832637349357624,-0.189303072965763,1.05091588616456,1.07406664006833,-0.219068327984891,0.0355899649565356,0.356393269051579,0.991385376126306,-0.10000730790838,0.455610785782005],"mode":"markers","type":"scatter3d","name":"1","marker":{"color":"rgba(102,194,165,1)","line":{"color":"rgba(102,194,165,1)"}},"textfont":{"color":"rgba(102,194,165,1)"},"error_y":{"color":"rgba(102,194,165,1)"},"error_x":{"color":"rgba(102,194,165,1)"},"line":{"color":"rgba(102,194,165,1)"},"frame":null},{"x":[0.381603000506399,0.199972099326748,0.0367675214551782,-0.140476159889215,-0.14398593575742,-0.187858134109993,-0.190490466011147,-0.20452956948397,-0.205407013451022,-0.334391276607586,-0.376508587026055,-0.449336436291325,-0.455478544060686,-0.475659755302869,-0.619560565899307,-0.636232001273284,-0.652903436647262,-0.664310208218931,-0.689756083263423,-0.699407966900989,-0.735383169550099,-0.759951600627539,-0.781887699803826,-0.795049359309597,-0.797681691210752,-0.803823798980112,-0.820495234354089,-0.841553889563324,-0.845941109398581,-0.850328329233838,-0.866999764607816,-0.908239631059235,-0.922278734532058,-0.92929828626847,-0.934562950070778,-0.943337389741293,-0.959131381148219,-0.999493803632586,-1.06442465719439,-1.08460586843658,-1.10478707967876,-1.1565562737348,-1.17586004100993,-1.23728111870353,-1.27237887738559,-1.27413376531969,-1.30923152400175,-1.42417668368549,-1.44786767079588,-1.54614139510564,-1.60405269693104,-1.69969408933964,-1.76813471876966,-1.7944580377812,-1.83482046026557,-1.94976561994931,-2.05505889599548,-2.25687100841732],"y":[-0.638210438770355,-0.551975723765084,-1.0053239397928,-0.505162592762222,-0.86242069778406,0.248775201283864,-0.246458447746408,0.0738419222731706,0.31529912428793,-0.867348395784361,-0.714589757775024,-1.12112484279987,-0.157759883740987,-1.25170883980786,0.11326350627558,-0.805752170780596,-1.11126944679927,-2.22000149686705,-0.0542782257346611,-1.87999033484626,-1.40446747781719,-0.125729846739029,-1.28373887680981,-0.0370312827336068,-1.46113600482066,-0.958510808789934,-0.815607566781199,-1.71737630083632,0.0492034322716646,-0.835318358782403,0.349793010290038,-1.27141963180906,-1.55968996482668,0.118191204275881,-0.470668706760114,-1.35765434681433,-0.199645316743547,-1.39214823281644,-0.221819957744902,-1.40200362881704,0.0294926402704597,-0.795896774779994,-1.54244302182563,-0.359795501753336,-2.04014051985605,-1.54490687082578,-1.54490687082578,-1.0151793357934,-2.10666444286012,-1.31823276281192,-1.4241782698184,0.344865312289737,-1.74940633783828,-1.51287683382382,-1.33547970581298,-1.35765434681433,-2.15594142286313,-1.46606370282096],"z":[0.075276971648706,-1.0822607235396,-0.381123605311253,-0.338129348061402,0.743341584300241,-0.17607407073504,-1.42621478153841,-0.0338622967547623,-0.29182784025387,-1.00288671015526,-1.14179123357785,0.0422044660718973,0.0388972155142168,-2.56721622393831,-1.20793624473147,-0.301749591926912,-0.262062585234743,-1.7040238283836,0.329935264590133,-1.45267278599985,-0.52002812873385,-0.523335379291531,-1.27077400532741,-1.80985584622939,-0.906976443982511,-0.761457419444553,-0.152923316831274,-0.75153566777151,-0.705234159963978,-0.943356200117,-0.771379171117596,-0.357972851407487,-1.23108699863524,0.171187237821451,-0.106621809023741,-1.4791307904613,0.584593557531559,-0.59609489156051,-0.212453826869529,-0.477033871483999,-0.576251388214425,-0.513413627618488,-2.12073739865139,-1.48243804101898,-0.963199703463086,-1.50889604548043,-0.983043206809171,-0.146308815715912,-2.5341437183615,-0.328207596388359,-1.73709633396041,-0.225682829100253,-2.16042440534356,-0.166152319061997,-1.66102957113375,-2.30263617932384,-4.01248471764484,-2.11081564697835],"mode":"markers","type":"scatter3d","name":"2","marker":{"color":"rgba(141,160,203,1)","line":{"color":"rgba(141,160,203,1)"}},"textfont":{"color":"rgba(141,160,203,1)"},"error_y":{"color":"rgba(141,160,203,1)"},"error_x":{"color":"rgba(141,160,203,1)"},"line":{"color":"rgba(141,160,203,1)"},"frame":null}],"highlight":{"on":"plotly_click","persistent":false,"dynamic":false,"selectize":false,"opacityDim":0.2,"selected":{"opacity":1},"debounce":0},"shinyEvents":["plotly_hover","plotly_click","plotly_selected","plotly_relayout","plotly_brushed","plotly_brushing","plotly_clickannotation","plotly_doubleclick","plotly_deselect","plotly_afterplot","plotly_sunburstclick"],"base_url":"https://plot.ly"},"evals":[],"jsHooks":[]}</script>
+<pre class="r"><code>library(GGally)
+ggpairs(happclust, aes(color = cluster))</code></pre>
+<p><img src="../../project/project1_files/figure-html/unnamed-chunk-6-3.png" width="672" style="display: block; margin: auto;" /></p>
+<pre class="r"><code>plot(pam, which = 2)</code></pre>
+<p><img src="../../project/project1_files/figure-html/unnamed-chunk-6-4.png" width="672" style="display: block; margin: auto;" /></p>
+<div id="to-begin-the-pam-cluster-analysis-i-chose-four-numeric-variables-score-gdp-social-support-and-surface-area-and-scaled-them.-i-determined-that-3-clusters-is-best-because-3-had-the-highest-value-using-the-silhouette-method.-a-pam-analysis-was-then-ran-on-the-data-and-visualized-using-2-different-plots.-the-first-plot-mapped-score-social-support-and-gdp-on-a-3d-graph.-the-graph-displays-a-positive-correlation-between-all-three-variables." class="section level4">
+<h4>To begin the PAM cluster analysis, I chose four numeric variables, score, GDP, social support, and surface area and scaled them. I determined that 3 clusters is best because 3 had the highest value using the silhouette method. A PAM analysis was then ran on the data and visualized using 2 different plots. The first plot mapped score, social support, and GDP on a 3D graph. The graph displays a positive correlation between all three variables.</h4>
+</div>
+<div id="the-second-graph-is-a-visualization-of-the-pairwise-combinations-of-all-four-variables.-this-visual-showed-that-the-strongest-correlation-is-between-gdp-and-score-0.806.-therefore-countries-with-high-gdp-have-high-happiness-score-and-countries-with-high-happiness-scores-have-high-gdp.-the-lowest-correlation-was-between-surface-area-and-social-support.-therefore-the-surface-area-of-a-country-is-not-very-indicative-of-its-social-support-levels.-the-goodness-of-fit-of-the-pam-clustering-was-0.44.-this-small-number-indicates-the-structure-is-weak-and-not-a-good-fit-for-the-data." class="section level4">
+<h4>The second graph is a visualization of the pairwise combinations of all four variables. This visual showed that the strongest correlation is between GDP and Score, 0.806. Therefore, countries with high GDP have high happiness score, and countries with high happiness scores have high GDP. The lowest correlation was between surface area and social support. Therefore, the surface area of a country is not very indicative of its social support levels. The goodness-of-fit of the PAM clustering was 0.44. This small number indicates the structure is weak and not a good fit for the data.</h4>
+</div>
+</div>
+
+            
+        <hr>         <div class="related-posts">
+                <h5>Related Posts</h5>
+                
+              </div> 
+            </div>
+          </div>
+
+   <hr>  <div class="disqus">
+  <div id="disqus_thread"></div>
+  <script type="text/javascript">
+
+    (function() {
+      
+      
+      if (window.location.hostname == "localhost")
+        return;
+
+      var disqus_shortname = '';
+      var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+      dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+      (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
+  </script>
+  <noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+  <a href="http://disqus.com/" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+</div> 
+        </div>
+      </div>
+    </div>
+
+    
+    <footer>
+  <div id="footer">
+    <div class="container">
+      <p class="text-muted">&copy; All rights reserved. Powered by <a href="https://gohugo.io/">Hugo</a> and
+      <a href="http://www.github.com/nurlansu/hugo-sustain/">sustain</a> with ♥</p>
+    </div>
+  </div>
+</footer>
+<div class="footer"></div>
+
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+<script src="../../js/docs.min.js"></script>
+<script src="../../js/main.js"></script>
+
+<script src="../../js/ie10-viewport-bug-workaround.js"></script>
+
+
+    
+  </body>
+</html>

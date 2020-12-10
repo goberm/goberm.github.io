@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Posts on Morgan Gober: The Latest and Greatest</title>
+    <link>/post/</link>
+    <description>Recent content in Posts on Morgan Gober: The Latest and Greatest</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-US</language>
+    <lastBuildDate>Wed, 09 Dec 2020 00:00:00 +0000</lastBuildDate><atom:link href="/post/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Python Blog</title>
+      <link>/post/2020/12/09/python-blog/</link>
+      <pubDate>Wed, 09 Dec 2020 00:00:00 +0000</pubDate>
+      
+      <guid>/post/2020/12/09/python-blog/</guid>
+      <description>Oh python, how we love you so!! But for real, are data processing programs not the coolest and most mind boggling technology you&#39;ve ever seen. They literally have such endless capabilities!! As I have recently gained more knowledge regarding the functions of Python, one handy tip has stood out to me. Drum roll please.....
+Tip = The fact that strings in Python are immutable. Basically, you can assign a string to a variable name and then in some way alter that string.</description>
+    </item>
+    
+  </channel>
+</rss>

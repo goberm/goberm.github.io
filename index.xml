@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Morgan Gober: The Latest and Greatest</title>
+    <link>/</link>
+    <description>Recent content on Morgan Gober: The Latest and Greatest</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-US</language>
+    <lastBuildDate>Wed, 09 Dec 2020 00:00:00 +0000</lastBuildDate><atom:link href="/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Python Blog</title>
+      <link>/post/2020/12/09/python-blog/</link>
+      <pubDate>Wed, 09 Dec 2020 00:00:00 +0000</pubDate>
+      
+      <guid>/post/2020/12/09/python-blog/</guid>
+      <description>Oh python, how we love you so!! But for real, are data processing programs not the coolest and most mind boggling technology you&#39;ve ever seen. They literally have such endless capabilities!! As I have recently gained more knowledge regarding the functions of Python, one handy tip has stood out to me. Drum roll please.....
+Tip = The fact that strings in Python are immutable. Basically, you can assign a string to a variable name and then in some way alter that string.</description>
+    </item>
+    
+    <item>
+      <title>Project 2: Modeling, Testing, and Predicting</title>
+      <link>/project/project2/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>/project/project2/</guid>
+      <description>wife&amp;lt;- read.csv(&amp;quot;https://vincentarelbundock.github.io/Rdatasets/csv/Ecdat/Workinghours.csv&amp;quot;) This dataset contains data that was collected from working women. It contains 12 columns and 3382 observations. There are 8 numeric variables. The numbers of hours the wife works, her household income (in hundreds of dollars), her age, the number of children she has between ages 0-5, 6-13, and 14-17, her local unemployment rate, and lastly her education years. There is one categorical variable, occupation of her husband.</description>
+    </item>
+    
+    <item>
+      <title>project1</title>
+      <link>/project/project1/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>/project/project1/</guid>
+      <description>R Markdown This is an R Markdown document. Markdown is a simple formatting syntax for authoring HTML, PDF, and MS Word documents. For more details on using R Markdown see http://rmarkdown.rstudio.com.
+When you click the Knit button a document will be generated that includes both content as well as the output of any embedded R code chunks within the document. You can embed an R code chunk like this:</description>
+    </item>
+    
+    <item>
+      <title>Projects</title>
+      <link>/projects/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>/projects/</guid>
+      <description> Check out some of my coding projects below:
+ Wrangling &amp;amp; Exploratory Data Analysis
+ Modeling, Inference, Prediction
+  -- </description>
+    </item>
+    
+    <item>
+      <title>Resume</title>
+      <link>/resume/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>/resume/</guid>
+      <description>  </description>
+    </item>
+    
+  </channel>
+</rss>

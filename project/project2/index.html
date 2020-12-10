@@ -1,0 +1,493 @@
+<!DOCTYPE html>
+<html lang="en-US">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="author" content="Morgan Gober" />
+    
+    <link rel="shortcut icon" type="image/x-icon" href="../../img/favicon.ico">
+    <title>Project 2: Modeling, Testing, and Predicting</title>
+    <meta name="generator" content="Hugo 0.79.0" />
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+    <link rel="stylesheet" type="text/css" href="../../css/main.css" />
+    <link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" />
+    <link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:200,400,200bold,400old" />
+    
+    <!--[if lt IE 9]>
+			<script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+			<script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+		<![endif]-->
+
+    
+  </head>
+
+  <body>
+    <div id="wrap">
+      
+      <nav class="navbar navbar-default">
+  <div class="container">
+    <div class="navbar-header">
+      <a class="navbar-brand" href="../../"><i class="fa fa-home"></i></a>
+      <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbar">
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+    </div>
+    <div class="navbar-collapse collapse" id="navbar">
+      <ul class="nav navbar-nav navbar-right">
+      
+        
+        <li><a href="../../post/">BLOG</a></li>
+        
+        <li><a href="../../projects/">PROJECTS</a></li>
+        
+        <li><a href="../../resume/">RESUME</a></li>
+        
+      
+      </ul>
+    </div>
+  </div>
+</nav>
+
+      <div class="container">
+        <div class="blog-post">
+          <h3>
+            <strong><a href="../../project/project2/">Project 2: Modeling, Testing, and Predicting</a></strong>
+          </h3>
+        </div>
+ 
+<div class="blog-title">
+          <h4>
+         January 1, 0001 
+            &nbsp;&nbsp;
+            
+          </h4>
+        </div>
+
+        <div class="panel panel-default">
+          <div class="panel-body">
+            <div class="blogpost">
+              
+
+
+<pre class="r"><code>wife&lt;- read.csv(&quot;https://vincentarelbundock.github.io/Rdatasets/csv/Ecdat/Workinghours.csv&quot;)</code></pre>
+<div id="this-dataset-contains-data-that-was-collected-from-working-women.-it-contains-12-columns-and-3382-observations.-there-are-8-numeric-variables.-the-numbers-of-hours-the-wife-works-her-household-income-in-hundreds-of-dollars-her-age-the-number-of-children-she-has-between-ages-0-5-6-13-and-14-17-her-local-unemployment-rate-and-lastly-her-education-years.-there-is-one-categorical-variable-occupation-of-her-husband.-the-options-were-farmer-fr-manager-or-professional-mp-sales-worker-clerk-or-craftsman-swcc-or-other.-finally-there-are-3-binary-variables-is-the-wife-non-white-is-her-home-owned-by-the-couple-and-do-they-have-a-mortgage." class="section level4">
+<h4>This dataset contains data that was collected from working women. It contains 12 columns and 3382 observations. There are 8 numeric variables. The numbers of hours the wife works, her household income (in hundreds of dollars), her age, the number of children she has between ages 0-5, 6-13, and 14-17, her local unemployment rate, and lastly her education years. There is one categorical variable, occupation of her husband. The options were farmer, (fr), manager or professional (mp), sales worker, clerk, or craftsman (swcc), or other. Finally, there are 3 binary variables: is the wife non-white, is her home owned by the couple, and do they have a mortgage.</h4>
+</div>
+<div id="manova" class="section level2">
+<h2>Manova</h2>
+<pre class="r"><code>man1&lt;-manova(cbind(age,education, income)~occupation, data=wife)
+summary(man1)</code></pre>
+<pre><code>## Df Pillai approx F num Df den Df Pr(&gt;F)
+## occupation 3 0.2277 92.483 9 10134 &lt; 2.2e-16 ***
+## Residuals 3378
+## ---
+## Signif. codes: 0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1
+&#39; &#39; 1</code></pre>
+<pre class="r"><code>summary.aov(man1)</code></pre>
+<pre><code>## Response age :
+## Df Sum Sq Mean Sq F value Pr(&gt;F)
+## occupation 3 6819 2272.87 17.898 1.598e-11 ***
+## Residuals 3378 428969 126.99
+## ---
+## Signif. codes: 0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1
+&#39; &#39; 1
+##
+## Response education :
+## Df Sum Sq Mean Sq F value Pr(&gt;F)
+## occupation 3 3114.1 1038.02 210.95 &lt; 2.2e-16 ***
+## Residuals 3378 16621.9 4.92
+## ---
+## Signif. codes: 0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1
+&#39; &#39; 1
+##
+## Response income :
+## Df Sum Sq Mean Sq F value Pr(&gt;F)
+## occupation 3 30061057 10020352 135.2 &lt; 2.2e-16 ***
+## Residuals 3378 250362010 74115
+## ---
+## Signif. codes: 0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1
+&#39; &#39; 1</code></pre>
+<pre class="r"><code>wife%&gt;%group_by(occupation)%&gt;%summarize(mean(age),mean(education),mean(income))</code></pre>
+<pre><code>## # A tibble: 4 x 4
+##   occupation `mean(age)` `mean(education)` `mean(income)`
+##   &lt;fct&gt;            &lt;dbl&gt;             &lt;dbl&gt;          &lt;dbl&gt;
+## 1 fr                38.2              11.7           189.
+## 2 mp                36.7              14.0           439.
+## 3 other             38.3              11.6           212.
+## 4 swcc              34.9              12.5           281.</code></pre>
+<pre class="r"><code>pairwise.t.test(wife$age,wife$occupation,p.adj=&quot;none&quot;)</code></pre>
+<pre><code>## 
+##  Pairwise comparisons using t tests with pooled SD 
+## 
+## data:  wife$age and wife$occupation 
+## 
+##       fr      mp      other  
+## mp    0.25188 -       -      
+## other 0.92783 0.00099 -      
+## swcc  0.00979 0.00031 5.6e-13
+## 
+## P value adjustment method: none</code></pre>
+<pre class="r"><code>pairwise.t.test(wife$education,wife$occupation,p.adj=&quot;none&quot;)</code></pre>
+<pre><code>## 
+##  Pairwise comparisons using t tests with pooled SD 
+## 
+## data:  wife$education and wife$occupation 
+## 
+##       fr     mp     other 
+## mp    &lt;2e-16 -      -     
+## other 0.7990 &lt;2e-16 -     
+## swcc  0.0018 &lt;2e-16 &lt;2e-16
+## 
+## P value adjustment method: none</code></pre>
+<pre class="r"><code>pairwise.t.test(wife$income,wife$occupation,p.adj=&quot;none&quot;)</code></pre>
+<pre><code>## 
+##  Pairwise comparisons using t tests with pooled SD 
+## 
+## data:  wife$income and wife$occupation 
+## 
+##       fr      mp      other  
+## mp    7.1e-16 -       -      
+## other 0.4490  &lt; 2e-16 -      
+## swcc  0.0028  &lt; 2e-16 1.4e-09
+## 
+## P value adjustment method: none</code></pre>
+<pre class="r"><code>0.05/22 ## Bonferroni correction</code></pre>
+<pre><code>## [1] 0.002272727</code></pre>
+<pre class="r"><code>##Assumptions
+library(rstatix)
+
+group &lt;- wife$occupation 
+DVs &lt;- wife %&gt;% select(age, education,income)
+
+sapply(split(DVs,group), mshapiro_test)</code></pre>
+<pre><code>## fr mp other swcc
+## statistic 0.7991666 0.5137868 0.7163884 0.8371361
+## p.value 2.079829e-09 2.922192e-45 1.78382e-42
+4.803303e-31</code></pre>
+<div id="in-total-22-tests-were-performed-1-manova-3-anovas-and-18-t-tests.-after-the-bonferroni-correction-the-new-signficance-level-was-0.0023.-it-was-concluded-that-occupation-differed-significantly-by-age-between-fr-and-swcc-mp-and-other-swcc-and-mp-and-other-and-swcc.-husbands-occupation-differed-signficantly-by-wifes-education-for-all-occupation-categories-excepet-between-fr-and-swcc.-husbands-occupation-differed-signficantly-by-household-income-for-all-occupation-categories-excepet-between-fr-and-swcc-and-fr-and-swcc.there-are-many-manova-assumptions-that-must-be-met-including-random-samples-independent-observations-multivariate-normality-homogeneity-no-outliers-and-no-linear-relationships.-the-multivariate-normaility-assumption-was-tested-for-and-the-p-value-was-less-than-0.05.-as-a-result-the-null-hypothesis-was-rejected-which-means-the-assumptions-were-not-met." class="section level4">
+<h4>In total 22 tests were performed: 1 Manova, 3 Anovas, and 18 t-tests. After the bonferroni correction, the new signficance level was 0.0023. It was concluded that occupation differed significantly by age between fr and swcc, mp and other, swcc and mp, and other and swcc. Husbands occupation differed signficantly by wife's education for all occupation categories excepet between fr and swcc. Husbands occupation differed signficantly by household income for all occupation categories excepet between fr and swcc and fr and swcc.There are many MANOVA assumptions that must be met including random samples, independent observations, multivariate normality, homogeneity, no outliers, and no linear relationships. The multivariate normaility assumption was tested for and the p-value was less than 0.05. As a result, the null hypothesis was rejected which means the assumptions were not met.</h4>
+</div>
+</div>
+<div id="randomization-test-difference-in-means" class="section level2">
+<h2>Randomization Test: Difference in Means</h2>
+<pre class="r"><code> wife%&gt;%group_by(mortgage)%&gt;%
+  summarize(means=mean(age))%&gt;%summarize(`mean_diff`=diff(means))</code></pre>
+<pre><code>## # A tibble: 1 x 1
+##   mean_diff
+##       &lt;dbl&gt;
+## 1     0.886</code></pre>
+<pre class="r"><code>rand_dist&lt;-vector()
+for(i in 1:5000){
+new&lt;-data.frame(age=sample(wife$age),mortgage=wife$mortgage) 
+rand_dist[i]&lt;-mean(new[new$mortgage==&quot;1&quot;,]$age)-   
+              mean(new[new$mortgage==&quot;0&quot;,]$age)
+}
+mean(rand_dist&lt; -0.88579     | rand_dist&gt; 0.88579) </code></pre>
+<pre><code>## [1] 0.0206</code></pre>
+<pre class="r"><code>{hist(rand_dist,main=&quot;&quot;,ylab=&quot;&quot;); abline(v = c(-0.88579, 0.88579),col=&quot;red&quot;)}</code></pre>
+<p><img src="../../project/project2_files/figure-html/unnamed-chunk-3-1.png" width="768" style="display: block; margin: auto;" /> ####I performed a randomized mean difference to test if there is a significant difference in age between groups that did and did not have a mortgage. The null hypothesis was: there is no significant mean difference in age between those who do and do not have a mortgage. The alternate hypothesis was: there is a significant mean difference in age between those who do and do not have a mortgage. The p-value was determined to be 0.0242. Therefore you reject the null hypothesis and conclude there is a mean difference in age between those who do and do not have a mortgage.</p>
+</div>
+<div id="linear-regression-model" class="section level2">
+<h2>Linear Regression Model</h2>
+<pre class="r"><code>##Regression Model
+wife$age_c &lt;- wife$age - mean(wife$age)
+wife$income_c &lt;- wife$income - mean(wife$income)
+fit&lt;-lm(education ~ age_c * income_c, data=wife)
+summary(fit)</code></pre>
+<pre><code>##
+## Call:
+## lm(formula = education ~ age_c * income_c, data = wife)
+##
+## Residuals:
+## Min 1Q Median 3Q Max
+## -11.2368 -1.0935 -0.2796 1.2373 5.9061
+##
+## Coefficients:
+## Estimate Std. Error t value Pr(&gt;|t|)
+## (Intercept) 1.260e+01 3.975e-02 317.063 &lt; 2e-16 ***
+## age_c -5.543e-02 3.559e-03 -15.574 &lt; 2e-16 ***
+## income_c 3.200e-03 1.795e-04 17.823 &lt; 2e-16 ***
+## age_c:income_c -7.477e-05 1.314e-05 -5.689 1.39e-08 ***
+## ---
+## Signif. codes: 0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1
+&#39; &#39; 1
+##
+## Residual standard error: 2.256 on 3378 degrees of
+freedom
+## Multiple R-squared: 0.1291, Adjusted R-squared: 0.1283
+## F-statistic: 166.9 on 3 and 3378 DF, p-value: &lt; 2.2e-16</code></pre>
+<pre class="r"><code>##Regression Plot
+wife_new &lt;- bind_rows(mutate(wife,age_c=0), mutate(wife,age_c=sd(age)), mutate(wife,age_c=-sd(age)))
+
+wife_new &lt;- wife_new%&gt;%
+  mutate(age_cat=c(rep(&quot;mean&quot;,nrow(wife)), rep(&quot;mean+1sd&quot;,nrow(wife)), rep(&quot;mean-1sd&quot;,nrow(wife))))
+
+wife_new$newprob &lt;- predict(fit, newdata=wife_new, type=&quot;response&quot;)
+ggplot(wife_new, aes(income_c,newprob))+geom_line(aes(color=age_cat))</code></pre>
+<p><img src="../../project/project2_files/figure-html/unnamed-chunk-4-1.png" width="768" style="display: block; margin: auto;" /></p>
+<pre class="r"><code>library(sandwich); library(lmtest)
+## Checking for assumptions
+
+resids&lt;-fit$residuals
+fitted&lt;-fit$fitted.values
+plot(fitted,resids); abline(h=0, col=&#39;red&#39;)</code></pre>
+<p><img src="../../project/project2_files/figure-html/unnamed-chunk-4-2.png" width="768" style="display: block; margin: auto;" /></p>
+<pre class="r"><code>par(mfrow=c(1,2)); hist(resids); qqnorm(resids); qqline(resids, col=&#39;red&#39;)</code></pre>
+<p><img src="../../project/project2_files/figure-html/unnamed-chunk-4-3.png" width="768" style="display: block; margin: auto;" /></p>
+<pre class="r"><code>##With Robust Standard Erros
+coeftest(fit)[,1:2] </code></pre>
+<pre><code>##                     Estimate   Std. Error
+## (Intercept)     1.260260e+01 3.974796e-02
+## age_c          -5.542972e-02 3.559088e-03
+## income_c        3.199807e-03 1.795354e-04
+## age_c:income_c -7.476854e-05 1.314355e-05</code></pre>
+<pre class="r"><code>coeftest(fit, vcov=vcovHC(fit))[,1:2]</code></pre>
+<pre><code>##                     Estimate   Std. Error
+## (Intercept)     1.260260e+01 4.368171e-02
+## age_c          -5.542972e-02 4.281447e-03
+## income_c        3.199807e-03 2.804388e-04
+## age_c:income_c -7.476854e-05 3.267141e-05</code></pre>
+<div id="years-is-the-mean-education-for-people-with-an-average-income-at-an-average-age.-at-an-average-income-for-every-1-unit-increase-in-age-education-level-goes-down-by--.055-years.-at-an-average-age-for-every-1-unit-increase-in-income-education-goes-up-by-0.0032-years.-there-was-an-interaction-between-age-and-income.-therefore-the-effect-of-age-on-education-depends-on-income.-the-coefficient-of--0.001-indicates-that-the-effect-of-income-on-education-decreases-the-older-you-are-in-age.-according-to-the-residual-and-qq-plot-the-linearity-and-homoskewdasticity-assumption-was-not-met.-in-addition-the-data-is-somewhat-normally-distrubuted-but-definitely-not-perfectly.-therefore-this-regression-model-did-not-meet-assumptions.-robust-standard-error-calculations-produced-a-larger-standard-error-than-before.-because-the-robust-standard-errors-are-larger-they-are-considered-the-more-conservative-of-the-two-values.-therefore-they-should-be-the-standard-errors-chosen-for-the-model.-the-adjusted-r-squared-value-was-0.128-therefore-12.8-of-the-variation-in-the-outcome-is-explained-by-the-model." class="section level4">
+<h4>12.6 years is the mean education for people with an average income at an average age. At an average income, for every 1 unit increase in age, education level goes down by -.055 years. At an average age, for every 1 unit increase in income, education goes up by 0.0032 years. There was an interaction between age and income. Therefore, the effect of age on education depends on income. The coefficient of -0.001 indicates that the effect of income on education decreases the older you are in age. According to the residual and qq plot, the linearity and homoskewdasticity assumption was not met. In addition, the data is somewhat normally distrubuted but definitely not perfectly. Therefore, this regression model did not meet assumptions. Robust standard error calculations produced a larger standard error than before. Because the robust standard errors are larger, they are considered the more conservative of the two values. Therefore, they should be the standard errors chosen for the model. The adjusted r-squared value was 0.128; therefore, 12.8% of the variation in the outcome is explained by the model.</h4>
+</div>
+</div>
+<div id="bootstrapping" class="section level2">
+<h2>Bootstrapping</h2>
+<pre class="r"><code>boot&lt;- sample_frac(wife, replace=T)
+samp_distn&lt;-replicate(5000, {
+  boot &lt;- sample_frac(wife, replace=T) 
+  fit1 &lt;- lm(education~income_c*age_c, data=boot) 
+  coef(fit1) 
+}) 
+samp_distn %&gt;% t %&gt;% as.data.frame %&gt;% summarize_all(sd) </code></pre>
+<pre><code>##   (Intercept)    income_c       age_c income_c:age_c
+## 1   0.0425837 0.000270012 0.004257188   2.568681e-05</code></pre>
+<div id="the-boot-strapped-standard-errors-are-slightly-smaller-than-the-robust-standard-errors-but-slightly-larger-the-original-ses.-since-it-is-better-to-go-with-the-more-larger-more-conservative-standard-errors-the-robust-standard-errors-from-above-should-still-be-used-to-represent-this-model." class="section level4">
+<h4>The boot strapped standard errors are slightly smaller than the robust standard errors but slightly larger the original SE's. Since it is better to go with the more larger, more conservative standard errors, the robust standard errors from above should still be used to represent this model.</h4>
+</div>
+</div>
+<div id="logistic-regression" class="section level2">
+<h2>Logistic Regression</h2>
+<pre class="r"><code>fit2&lt;-glm(owned~age+income+hours, data=wife, family=&quot;binomial&quot;)
+coeftest(fit2)</code></pre>
+<pre><code>##
+## z test of coefficients:
+##
+## Estimate Std. Error z value Pr(&gt;|z|)
+## (Intercept) -3.4419e+00 1.8697e-01 -18.4089 &lt; 2.2e-16
+***
+## age 6.9225e-02 4.3662e-03 15.8546 &lt; 2.2e-16 ***
+## income 6.1489e-03 3.5496e-04 17.3227 &lt; 2.2e-16 ***
+## hours 2.5334e-04 4.8638e-05 5.2087 1.901e-07 ***
+## ---
+## Signif. codes: 0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1
+&#39; &#39; 1</code></pre>
+<pre class="r"><code>coef(fit2)%&gt;%exp%&gt;%round(5)%&gt;%data.frame</code></pre>
+<pre><code>##                   .
+## (Intercept) 0.03201
+## age         1.07168
+## income      1.00617
+## hours       1.00025</code></pre>
+<pre class="r"><code>probs&lt;-predict(fit2,type=&quot;response&quot;)
+table(predict=as.numeric(probs&gt;.5),truth=wife$owned)%&gt;%addmargins</code></pre>
+<pre><code>##        truth
+## predict    0    1  Sum
+##     0    565  268  833
+##     1    514 2035 2549
+##     Sum 1079 2303 3382</code></pre>
+<pre class="r"><code>#Sensitivity
+2035/2303</code></pre>
+<pre><code>## [1] 0.88363</code></pre>
+<pre class="r"><code>#Speceficity: 
+565/1079</code></pre>
+<pre><code>## [1] 0.523633</code></pre>
+<pre class="r"><code>#Precision
+2035/2303</code></pre>
+<pre><code>## [1] 0.88363</code></pre>
+<pre class="r"><code>#Accuracy
+(565+2303)/3382</code></pre>
+<pre><code>## [1] 0.8480189</code></pre>
+<pre class="r"><code>library(plotROC)
+ROCplot&lt;-ggplot(wife)+geom_roc(aes(d=owned,m=probs), n.cuts=0) 
+ROCplot</code></pre>
+<p><img src="../../project/project2_files/figure-html/unnamed-chunk-6-1.png" width="768" style="display: block; margin: auto;" /></p>
+<pre class="r"><code>calc_auc(ROCplot)</code></pre>
+<pre><code>##   PANEL group      AUC
+## 1     1    -1 0.803852</code></pre>
+<pre class="r"><code>#ggplot
+wife$logit&lt;-predict(fit2,type=&quot;link&quot;)
+wife%&gt;%mutate(owned=as.factor(owned)) %&gt;%ggplot()+geom_density(aes(logit,color=owned,fill=owned), alpha=0.4)+
+  theme(legend.position=c(.85,.85))+geom_vline(xintercept=0)+xlab(&quot;logit (log-odds)&quot;)+
+  geom_rug(aes(logit,color=owned))</code></pre>
+<p><img src="../../project/project2_files/figure-html/unnamed-chunk-6-2.png" width="768" style="display: block; margin: auto;" /> ##Predicted odds of homeownership when age, income, and hours are 0 is 0.032. Controlling for income and hours, for every one-unit increase in age, predicted odds of ownership increase by a factor of 1.07. Controlling for age and hours, for every one-unit increase in income, predicted odds of ownership increase by a factor of 1.006. Controlling for age and income, for every one-unit increase in hours, predicted odds of ownership increase by a factor of 1.00. The TPR is 0.884. The TNR is 0.524. The precision is 0.884,and the accuracy is 0.848. Therefore, the accuracy, sensitivity, and precision are pretty good. The speceficity is okay but definitely has room for improvement. The auc, 0.8, is considered good. Therefore, this model is pretty good at predicting ownership.</p>
+</div>
+<div id="logistic-regression-with-all-variables-lasso" class="section level2">
+<h2>Logistic Regression with all Variables &amp; Lasso</h2>
+<pre class="r"><code>#Class Diag 
+class_diag&lt;-function(probs,truth){
+  tab&lt;-table(factor(probs&gt;.5,levels=c(&quot;FALSE&quot;,&quot;TRUE&quot;)),truth)
+  acc=sum(diag(tab))/sum(tab)
+  sens=tab[2,2]/colSums(tab)[2]
+  spec=tab[1,1]/colSums(tab)[1]
+  ppv=tab[2,2]/rowSums(tab)[2]
+  f1=2*(sens*ppv)/(sens+ppv)
+
+  if(is.numeric(truth)==FALSE &amp; is.logical(truth)==FALSE){
+    truth&lt;-as.numeric(truth)-1}
+  
+  ord&lt;-order(probs, decreasing=TRUE)
+  probs &lt;- probs[ord]; truth &lt;- truth[ord]
+  
+  TPR=cumsum(truth)/max(1,sum(truth)) 
+  FPR=cumsum(!truth)/max(1,sum(!truth))
+  
+  dup&lt;-c(probs[-1]&gt;=probs[-length(probs)], FALSE)
+  TPR&lt;-c(0,TPR[!dup],1); FPR&lt;-c(0,FPR[!dup],1)
+  
+  n &lt;- length(TPR)
+  auc&lt;- sum( ((TPR[-1]+TPR[-n])/2) * (FPR[-1]-FPR[-n]) )
+
+  data.frame(acc,sens,spec,ppv,f1,auc)
+}
+
+##Logistic Regression with all variables 
+fit3&lt;-glm(owned~age+education+income+child5+child13+child17+nonwhite+mortgage+unemp, data=wife, family=&quot;binomial&quot;)
+prob3&lt;-predict(fit3,type=&quot;response&quot;)
+class_diag(prob3,wife$owned)</code></pre>
+<pre><code>## acc sens spec ppv f1 auc
+## 1 0.9086339 0.913591 0.8980538 0.9503162 0.9315918
+0.965872</code></pre>
+<pre class="r"><code>##Out of Sample:
+k=10
+data&lt;-wife[sample(nrow(wife)),] 
+folds&lt;-cut(seq(1:nrow(wife)),breaks=k,labels=F) 
+diags&lt;-NULL
+for(i in 1:k){
+  train&lt;-data[folds!=i,]
+  test&lt;-data[folds==i,]
+  truth&lt;-test$owned
+  fit&lt;-glm(owned~age+education+income+child5+child13+child17+nonwhite+mortgage+unemp, data=wife,family=&quot;binomial&quot;)
+  probs&lt;-predict(fit,newdata = test,type=&quot;response&quot;)
+  diags&lt;-rbind(diags,class_diag(probs,truth))
+}
+summarize_all(diags,mean)</code></pre>
+<pre><code>## acc sens spec ppv f1 auc
+## 1 0.9086514 0.9135036 0.8981463 0.9501902 0.9313762
+0.9653966</code></pre>
+<pre class="r"><code>#LASSO
+library(glmnet)
+y&lt;-as.matrix(wife$owned) 
+x&lt;-model.matrix(owned~age+education+income+child5+child13+child17+nonwhite+mortgage+unemp,data=wife) 
+head(x)</code></pre>
+<pre><code>## (Intercept) age education income child5 child13 child17
+nonwhite mortgage unemp
+## 1 1 26 12 350 0 1 0 0 1 7
+## 2 1 29 8 241 0 1 1 0 1 4
+## 3 1 33 10 160 0 2 0 0 0 7
+## 4 1 20 9 80 2 0 0 0 1 7
+## 5 1 33 12 456 0 2 0 0 1 7
+## 6 1 22 12 390 2 0 0 0 1 7</code></pre>
+<pre class="r"><code>cv &lt;- cv.glmnet(x,y, family=&quot;binomial&quot;)
+{plot(cv$glmnet.fit, &quot;lambda&quot;, label=TRUE); abline(v = log(cv$lambda.1se)); abline(v = log(cv$lambda.min),lty=2)}</code></pre>
+<p><img src="../../project/project2_files/figure-html/unnamed-chunk-7-1.png" width="768" style="display: block; margin: auto;" /></p>
+<pre class="r"><code>lasso&lt;-glmnet(x,y,family=&quot;binomial&quot;,lambda=cv$lambda.1se)
+coef(lasso)</code></pre>
+<pre><code>## 11 x 1 sparse Matrix of class &quot;dgCMatrix&quot;
+##                       s0
+## (Intercept) -4.543741030
+## (Intercept)  .          
+## age          0.094479366
+## education    .          
+## income       0.001250309
+## child5       .          
+## child13      .          
+## child17      .          
+## nonwhite    -0.381913950
+## mortgage     5.946012883
+## unemp        0.016235234</code></pre>
+<pre class="r"><code>##Lasso Variable Logistic Regression
+k=10
+data&lt;-wife[sample(nrow(wife)),] 
+folds&lt;-cut(seq(1:nrow(wife)),breaks=k,labels=F) 
+diags&lt;-NULL
+for(i in 1:k){
+  train&lt;-data[folds!=i,]
+  test&lt;-data[folds==i,]
+  truth&lt;-test$owned
+  fit&lt;-glm(owned~age+income+nonwhite+mortgage, data=wife,family=&quot;binomial&quot;)
+  probs&lt;-predict(fit,newdata = test,type=&quot;response&quot;)
+  diags&lt;-rbind(diags,class_diag(probs,truth))
+}
+summarize_all(diags,mean)</code></pre>
+<pre><code>## acc sens spec ppv f1 auc
+## 1 0.9089255 0.9132469 0.8998095 0.9510783 0.9316809
+0.9656467</code></pre>
+<div id="for-the-logistic-regression-model-testing-all-variables-accuracy0.908-sensitivity0.91-specificity0.89-precision0.95and-auc0.965.-this-a-a-very-good-auc-which-indicates-that-sensitivity-and-specificity-are-also-very-good.-this-was-proven-by-the-tpr-and-tnr-values-given-by-class-diagnostics.-overall-all-of-the-values-were-very-high-which-indicates-this-model-is-very-good-at-predicting-ownership." class="section level4">
+<h4>For the logistic regression model testing all variables: accuracy=0.908, sensitivity=0.91, specificity=0.89, precision=0.95,and auc=0.965. This a a very good auc which indicates that sensitivity and specificity are also very good. This was proven by the TPR and TNR values given by class diagnostics. Overall, all of the values were very high which indicates this model is very good at predicting ownership.</h4>
+</div>
+<div id="the-out-of-sample-class-diags-were-calculated-at-accuracy0.908-sensitivity0.94-specificity0.89-precision0.95and-auc-0.967.-this-auc-is-also-classified-as-very-good-and-is-almost-exactly-equal-to-the-in-sample-auc.-therefore-the-model-does-not-appear-to-be-overfitted." class="section level4">
+<h4>The out of sample class diags were calculated at: accuracy=0.908, sensitivity=0.94, specificity=0.89, precision=0.95,and auc 0.967. This auc is also classified as very good and is almost exactly equal to the in-sample AUC. Therefore, the model does not appear to be overfitted.</h4>
+</div>
+<div id="after-performing-lasso-the-variables-age-income-nonwhite-and-mortgage-all-had-a-nonzero-value.-therefore-they-were-the-variables-that-were-retained.-the-10-fold-cv-using-the-lasso-selected-variables-produced-a-model-with-an-auc-of-0.965-which-is-considered-very-good.-when-compared-to-the-other-aucs-calculated-with-the-logistic-regressions-above-this-auc-is-very-similar.-therefore-there-is-not-much-of-a-difference-in-predicitions-made-by-the-model-including-all-the-variables-and-the-model-only-using-the-lasso-selected-variables.-overall-all-of-the-models-have-a-very-good-auc-indicating-they-are-all-about-equally-good-at-predicting-ownership." class="section level4">
+<h4>After performing Lasso, the variables age, income, nonwhite, and mortgage all had a nonzero value. Therefore, they were the variables that were retained. The 10-fold cv using the lasso selected variables produced a model with an auc of 0.965, which is considered very good. When compared to the other auc's calculated with the logistic regressions above, this auc is very similar. Therefore, there is not much of a difference in predicitions made by the model including all the variables and the model only using the lasso selected variables. Overall, all of the models have a very good auc indicating they are all about equally good at predicting ownership.</h4>
+</div>
+</div>
+
+            
+        <hr>         <div class="related-posts">
+                <h5>Related Posts</h5>
+                
+              </div> 
+            </div>
+          </div>
+
+   <hr>  <div class="disqus">
+  <div id="disqus_thread"></div>
+  <script type="text/javascript">
+
+    (function() {
+      
+      
+      if (window.location.hostname == "localhost")
+        return;
+
+      var disqus_shortname = '';
+      var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+      dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+      (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
+  </script>
+  <noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+  <a href="http://disqus.com/" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+</div> 
+        </div>
+      </div>
+    </div>
+
+    
+    <footer>
+  <div id="footer">
+    <div class="container">
+      <p class="text-muted">&copy; All rights reserved. Powered by <a href="https://gohugo.io/">Hugo</a> and
+      <a href="http://www.github.com/nurlansu/hugo-sustain/">sustain</a> with ♥</p>
+    </div>
+  </div>
+</footer>
+<div class="footer"></div>
+
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+<script src="../../js/docs.min.js"></script>
+<script src="../../js/main.js"></script>
+
+<script src="../../js/ie10-viewport-bug-workaround.js"></script>
+
+
+    
+  </body>
+</html>
